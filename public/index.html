@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Serverless Kowhub armybuilder for Kings of War"
     />
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
@@ -27,17 +27,39 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="root">
+      <div class="loader-container">
+        <div class="loader">
+          <h1 class="loader-logo">Kowhub</h1>
+          <h3 class="loader-message">Loading...</h3>
+          <noscript>
+            <h3>You need to enable JavaScript to run this app.</h3>
+            <style>
+              .loader>h3 {
+                display: none;
+              }
+            </style>
+          </noscript>
+        </div>
+        <style>
+          body {
+            margin: 0;
+          }
+          .loader-container {
+            background-color: rgb(248, 202, 77);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+          }
+          .loader {
+            margin: auto;
+          }
+          .loader>h1, .loader>h3, .loader>noscript>h3 {
+            text-align: center;
+          }
+        </style>
+      </div>
+    </div>
   </body>
 </html>
