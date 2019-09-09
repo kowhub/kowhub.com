@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Auth } from 'aws-amplify'
+import { withAuthenticator } from 'aws-amplify-react'
+
 function App() {
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(user => console.log({ user }))
+      .catch(error => console.log({ error }))
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -23,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App, { includeGreetings: true});
