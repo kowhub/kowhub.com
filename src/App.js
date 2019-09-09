@@ -3,33 +3,43 @@ import logo from './logo.svg';
 import './App.css';
 
 import { Auth } from 'aws-amplify'
-import { withAuthenticator } from 'aws-amplify-react'
+import { Authenticator, AmplifyTheme } from 'aws-amplify-react'
+import Builder from './Builder'
+import LogoutButton from './LogoutButton'
+import useAmplifyAuth from './useAmplifyAuth'
 
-function App() {
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then(user => console.log({ user }))
-      .catch(error => console.log({ error }))
-  })
+const App = () => {
+  const { state: { isLoading, isError, user}, handleSignout } = useAmplifyAuth();
+  console.log('User: ' + user);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  return !user ? (
+    <Authenticator theme={theme} />
+  ) : (
+    <div>
+      <LogoutButton handleSignout={handleSignout}/>
+      <Builder />
     </div>
   );
 }
 
-export default withAuthenticator(App, { includeGreetings: true});
+const theme = {
+  ...AmplifyTheme,
+  navBar: {
+    ...AmplifyTheme.navBar,
+    backgroundColor: "#ffc0cb"
+  },
+  button: {
+    ...AmplifyTheme.button,
+    backgroundColor: "var(--amazonOrange)"
+  },
+  sectionBody: {
+    ...AmplifyTheme.sectionBody,
+    padding: "5px"
+  },
+  sectionHeader: {
+    ...AmplifyTheme.sectionHeader,
+    backgroundColor: "var(--squidInk)"
+  }
+};
+
+export default App;
