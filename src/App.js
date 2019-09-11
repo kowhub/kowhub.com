@@ -5,14 +5,14 @@ import './App.scss';
 import Builder from './Builder'
 import LogoutButton from './LogoutButton'
 import useAmplifyAuth from './useAmplifyAuth'
-import LoginPage from './LoginPage'
+import AuthenticationPage from './AuthenticationPage'
 
 const App = () => {
   const { state: { isLoading, isError, user}, handleSignout } = useAmplifyAuth();
   console.log('User: ' + user);
 
   return !user ? (
-    <LoginPage />
+    <AuthenticationPage />
   ) : (
     <div>
       <LogoutButton handleSignout={handleSignout}/>

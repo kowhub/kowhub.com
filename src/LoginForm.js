@@ -38,35 +38,41 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={signIn}>
-      <div class="login_form__input">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={state.username}
-          onChange={onChange}
-          required
-        />
-      </div>
+    <div class="login_form">
+      <form onSubmit={signIn}>
+        <div class="login_form__input">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={state.username}
+            onChange={onChange}
+            required
+          />
+        </div>
 
-      <div class="login_form__input">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={state.password}
-          onChange={onChange}
-          required
-        />
-      </div>
+        <div class="login_form__input">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={state.password}
+            onChange={onChange}
+            required
+          />
+        </div>
 
-      <div class="login_form__button">
-        <button type="submit">Login</button>
+        <div class="login_form__button">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+
+      <div class="login_form__link">
+        Don't have an account? <a href="#">Create one</a>
       </div>
-    </form>
+    </div>
   )
 }
 
