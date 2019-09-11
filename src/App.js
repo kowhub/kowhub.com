@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 import Builder from './Builder'
 import LogoutButton from './LogoutButton'
 import useAmplifyAuth from './useAmplifyAuth'
-import LoginForm from './LoginForm'
+import LoginPage from './LoginPage'
 
 const App = () => {
   const { state: { isLoading, isError, user}, handleSignout } = useAmplifyAuth();
   console.log('User: ' + user);
 
   return !user ? (
-    <LoginForm />
+    <LoginPage />
   ) : (
     <div>
       <LogoutButton handleSignout={handleSignout}/>

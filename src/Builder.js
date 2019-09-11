@@ -1,5 +1,5 @@
 import React from 'react';
-import './Builder.css';
+import './Builder.scss';
 
 const Builder = () => {
   return (

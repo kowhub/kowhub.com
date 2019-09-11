@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { Auth } from 'aws-amplify'
+import './LoginForm.scss';
 
 const credentialsReducer = (state, action) => {
   switch (action.type) {
@@ -62,7 +63,9 @@ const LoginForm = () => {
         />
       </div>
 
-      <button type="submit">Login</button>
+      <div class="login_form__button">
+        <button type="submit">Login</button>
+      </div>
     </form>
   )
 }
