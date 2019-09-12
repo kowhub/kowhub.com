@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from 'react'
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
-import './LoginForm.scss';
+import './SignUpForm.scss'
 
 const credentialsReducer = (state, action) => {
   switch (action.type) {
@@ -12,9 +12,10 @@ const credentialsReducer = (state, action) => {
   }
 }
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const initialState = {
     username: '',
+    email: '',
     password: ''
   }
 
@@ -28,20 +29,26 @@ const LoginForm = () => {
     })
   }
 
-  const signIn = async (evt) => {
+  const createAccount = async (evt) => {
     evt.preventDefault()
-    const { username, password } = state
+    const { username, email, password } = state
     try {
-      await Auth.signIn({ username, password })
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email
+        }
+      })
     } catch (err) {
-      console.log('error signing up user, ', err)
+      console.log('error creating account, ', err)
     }
   }
 
   return (
-    <div class="login_form">
-      <form onSubmit={signIn}>
-        <div class="login_form__input">
+    <div class="sign_up_form">
+      <form onSubmit={createAccount}>
+        <div class="sign_up_form__input">
           <label for="username">Username</label>
           <input
             type="text"
@@ -53,7 +60,19 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="login_form__input">
+        <div class="sign_up_form__input">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={state.email}
+            onChange={onChange}
+            required
+          />
+        </div>
+
+        <div class="sign_up_form__input">
           <label for="password">Password</label>
           <input
             type="password"
@@ -65,17 +84,17 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="login_form__button">
-          <button type="submit">Login</button>
+        <div class="sign_up_form__button">
+          <button type="submit">Create account</button>
         </div>
       </form>
 
-      <div class="login_form__link">
-        Don't have an account?
-        <Link to="/signup">  Create one</Link>
+      <div class="sign_up_form__link">
+        Already have an account?
+        <Link to="/">  Sign in</Link>
       </div>
     </div>
   )
 }
 
-export default LoginForm
+export default SignUpForm

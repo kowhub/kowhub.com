@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { HashRouter } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.scss';
 
@@ -12,12 +13,16 @@ const App = () => {
   console.log('User: ' + user);
 
   return !user ? (
-    <AuthenticationPage />
+    <HashRouter basename='/'>
+      <AuthenticationPage />
+    </HashRouter>
   ) : (
-    <div>
-      <LogoutButton handleSignout={handleSignout}/>
-      <Builder />
-    </div>
+    <HashRouter basename='/'>
+      <div>
+        <LogoutButton handleSignout={handleSignout}/>
+        <Builder />
+      </div>
+    </HashRouter>
   );
 }
 
