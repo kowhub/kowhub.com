@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
 import './AuthenticationForm.scss'
 
 const ConfirmSignUpForm = () => {
-  const { state, setInput } = useAuthenticationInput()
+  const [ errorMessage, setErrorMessage ] = useState('')
+  const [ nextStage, setNextStage ] = useState('')
+
+  const { input, updateInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    setInput({
+    updateInput({
       name: e.target.name,
       value: e.target.value
     })
@@ -17,23 +20,24 @@ const ConfirmSignUpForm = () => {
   const confirmSignUp = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username, code } = state
+    const { username, code } = input
     try {
-      await Auth.confirmSignUp({
-        username,
-        code,
-        options: {
-          forceAliasCreation: true
-        }
-      })
+      await Auth.confirmSignUp(username, code)
+      setNextStage('LOGIN')
     } catch (err) {
-      console.log('error confirming sign up, ', err)
+      setErrorMessage(err.message)
     }
+  }
+
+  if (nextStage === 'LOGIN') {
+    return <Redirect to='/login' />
   }
 
   return (
     <div class="auth_form">
       <h3>Confirm sign up</h3>
+
+      <div class="auth_msg">{errorMessage}</div>
 
       <form onSubmit={confirmSignUp}>
         <div class="auth_form__input">
@@ -42,7 +46,7 @@ const ConfirmSignUpForm = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={state.username}
+            value={input.username}
             onChange={onChange}
             required
           />
@@ -54,7 +58,7 @@ const ConfirmSignUpForm = () => {
             type="text"
             name="code"
             placeholder="Enter your code"
-            value={state.code}
+            value={input.code}
             onChange={onChange}
             required
           />

@@ -1,14 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
 import './AuthenticationForm.scss'
 
 const ResendSignUpForm = () => {
-  const { state, setInput } = useAuthenticationInput()
+  const [ errorMessage, setErrorMessage ] = useState('')
+  const [ nextStage, setNextStage ] = useState('')
+
+  const { input, updateInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    setInput({
+    updateInput({
       name: e.target.name,
       value: e.target.value
     })
@@ -17,18 +20,24 @@ const ResendSignUpForm = () => {
   const resendSignUp = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username } = state
+    const { username } = input
     try {
       await Auth.resendSignUp(username)
-      // probably set some state here to show message
+      setNextStage('CONFIRM_SIGN_UP')
     } catch (err) {
-      console.log('error resending sign up ', err)
+      setErrorMessage(err.message)
     }
+  }
+
+  if (nextStage === 'CONFIRM_SIGN_UP') {
+    return <Redirect to='/confirm_sign_up' />
   }
 
   return (
     <div class="auth_form">
       <h3>Resend validation code</h3>
+
+      <div class="auth_msg">{errorMessage}</div>
 
       <form onSubmit={resendSignUp}>
         <div class="auth_form__input">
@@ -37,7 +46,7 @@ const ResendSignUpForm = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={state.username}
+            value={input.username}
             onChange={onChange}
             required
           />

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
 import './AuthenticationForm.scss';
 
 const LoginForm = () => {
-  const { state, setInput } = useAuthenticationInput()
+  const [ errorMessage, setErrorMessage ] = useState('')
+  const [ nextStage, setNextStage ] = useState('')
+
+  const { input, updateInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    setInput({
+    updateInput({
       name: e.target.name,
       value: e.target.value
     })
@@ -17,20 +20,27 @@ const LoginForm = () => {
   const signIn = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username, password } = state
+    const { username, password } = input
     try {
       await Auth.signIn({ username, password })
     } catch (err) {
-      //if (err['__type'] === 'UserNotConfirmedException') {
-        //return <Redirect to='/confirm_sign_up' />
-      //}
-      console.log('error signing up user, ', err)
+      if (err.code === 'UserNotConfirmedException') {
+        setNextStage('CONFIRM_SIGN_UP')
+      } else {
+        setErrorMessage(err.message)
+      }
     }
+  }
+
+  if (nextStage === 'CONFIRM_SIGN_UP') {
+    return <Redirect to='/confirm_sign_up' />
   }
 
   return (
     <div class="auth_form">
       <h3>Login</h3>
+
+      <div class="auth_msg">{errorMessage}</div>
 
       <form onSubmit={signIn}>
         <div class="auth_form__input">
@@ -39,7 +49,7 @@ const LoginForm = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={state.username}
+            value={input.username}
             onChange={onChange}
             required
           />
@@ -51,7 +61,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={state.password}
+            value={input.password}
             onChange={onChange}
             required
           />

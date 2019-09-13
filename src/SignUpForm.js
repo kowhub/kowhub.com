@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
 import './AuthenticationForm.scss'
 
 const SignUpForm = () => {
-  const { state, setInput } = useAuthenticationInput()
+  const [ errorMessage, setErrorMessage ] = useState('')
+  //const [ nextStage, setNextStage ] = useState('')
+
+  const { input, updateInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    setInput({
+    updateInput({
       name: e.target.name,
       value: e.target.value
     })
@@ -17,7 +20,7 @@ const SignUpForm = () => {
   const createAccount = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username, email, password } = state
+    const { username, email, password } = input
     try {
       const { userConfirmed } = await Auth.signUp({
         username,
@@ -30,13 +33,15 @@ const SignUpForm = () => {
       } else {
       }
     } catch (err) {
-      console.log('error creating account, ', err)
+      setErrorMessage(err.message)
     }
   }
 
   return (
     <div class="auth_form">
       <h3>Create account</h3>
+
+      <div class="auth_msg">{errorMessage}</div>
 
       <form onSubmit={createAccount}>
         <div class="auth_form__input">
@@ -45,7 +50,7 @@ const SignUpForm = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={state.username}
+            value={input.username}
             onChange={onChange}
             required
           />
@@ -57,7 +62,7 @@ const SignUpForm = () => {
             type="email"
             name="email"
             placeholder="Email"
-            value={state.email}
+            value={input.email}
             onChange={onChange}
             required
           />
@@ -69,7 +74,7 @@ const SignUpForm = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={state.password}
+            value={input.password}
             onChange={onChange}
             required
           />

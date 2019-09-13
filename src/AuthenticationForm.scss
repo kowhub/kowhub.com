@@ -1,4 +1,17 @@
 .auth_form {
+  & > h3 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  & > .auth_msg {
+    color: red;
+    height: 15px;
+    margin-top: 0;
+    margin-bottom: 9px;
+    font-size: 12px;
+  }
+
   & > form {
     text-align: left;
     margin: auto;
@@ -22,7 +35,7 @@
     }
   }
 
-  .auth_form__link {
+  & > .auth_form__link {
     width: 100%;
     margin-top: 15px;
     font-size: 12px;

@@ -12,15 +12,15 @@ const useAuthenticationInput = () => {
     code: ''
   }
 
-  const [state, dispatch] = useReducer(inputReducer, initialState);
+  const [input, dispatch] = useReducer(inputReducer, initialState);
 
-  const setInput = ({ name, value }) => {
+  const updateInput = ({ name, value }) => {
     if (initialState.hasOwnProperty(name)) {
       dispatch({ name, value })
     }
   }
 
-  return { state, setInput }
+  return { input, updateInput }
 }
 
 export default useAuthenticationInput
