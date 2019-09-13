@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
-import './SignUpForm.scss'
+import './AuthenticationForm.scss'
 
 const SignUpForm = () => {
   const { state, setInput } = useAuthenticationInput()
@@ -35,11 +35,11 @@ const SignUpForm = () => {
   }
 
   return (
-    <div class="sign_up_form">
+    <div class="auth_form">
       <h3>Create account</h3>
 
       <form onSubmit={createAccount}>
-        <div class="sign_up_form__input">
+        <div class="auth_form__input">
           <label for="username">Username</label>
           <input
             type="text"
@@ -51,7 +51,7 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="sign_up_form__input">
+        <div class="auth_form__input">
           <label for="email">Email</label>
           <input
             type="email"
@@ -63,7 +63,7 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="sign_up_form__input">
+        <div class="auth_form__input">
           <label for="password">Password</label>
           <input
             type="password"
@@ -75,17 +75,17 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="sign_up_form__button">
+        <div class="auth_form__button">
           <button type="submit">Create account</button>
         </div>
       </form>
 
-      <div class="sign_up_form__link">
+      <div class="auth_form__link">
         Already have an account?{" "}
         <Link to="/login">Login</Link>
       </div>
 
-      <div class="sign_up_form__link">
+      <div class="auth_form__link">
         Already received a validation code?{" "}
         <Link to="/confirm_sign_up">Confirm sign up</Link>
       </div>

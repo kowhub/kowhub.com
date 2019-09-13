@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
-import './LoginForm.scss';
+import './AuthenticationForm.scss';
 
 const LoginForm = () => {
   const { state, setInput } = useAuthenticationInput()
@@ -29,11 +29,11 @@ const LoginForm = () => {
   }
 
   return (
-    <div class="login_form">
+    <div class="auth_form">
       <h3>Login</h3>
 
       <form onSubmit={signIn}>
-        <div class="login_form__input">
+        <div class="auth_form__input">
           <label for="username">Username</label>
           <input
             type="text"
@@ -45,7 +45,7 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="login_form__input">
+        <div class="auth_form__input">
           <label for="password">Password</label>
           <input
             type="password"
@@ -57,12 +57,12 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="login_form__button">
+        <div class="auth_form__button">
           <button type="submit">Login</button>
         </div>
       </form>
 
-      <div class="login_form__link">
+      <div class="auth_form__link">
         Don't have an account?{" "}
         <Link to="/sign_up">Create account</Link>
       </div>

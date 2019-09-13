@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
-import './ConfirmSignUpForm.scss'
+import './AuthenticationForm.scss'
 
 const ConfirmSignUpForm = () => {
   const { state, setInput } = useAuthenticationInput()
@@ -32,11 +32,11 @@ const ConfirmSignUpForm = () => {
   }
 
   return (
-    <div class="confirm_sign_up_form">
+    <div class="auth_form">
       <h3>Confirm sign up</h3>
 
       <form onSubmit={confirmSignUp}>
-        <div class="confirm_sign_up_form__input">
+        <div class="auth_form__input">
           <label for="username">Username</label>
           <input
             type="text"
@@ -48,7 +48,7 @@ const ConfirmSignUpForm = () => {
           />
         </div>
 
-        <div class="confirm_sign_up_form__input">
+        <div class="auth_form__input">
           <label for="code">Confirmation Code</label>
           <input
             type="text"
@@ -60,17 +60,17 @@ const ConfirmSignUpForm = () => {
           />
         </div>
 
-        <div class="confirm_sign_up_form__button">
+        <div class="auth_form__button">
           <button type="submit">Confirm</button>
         </div>
       </form>
 
-      <div class="confirm_sign_up_form__link">
+      <div class="auth_form__link">
         Lost your code?{" "}
         <Link to="/resend_sign_up">Resend</Link>
       </div>
 
-      <div class="confirm_sign_up_form__link">
+      <div class="auth_form__link">
         Already have an account?{" "}
         <Link to="/login">Login</Link>
       </div>
