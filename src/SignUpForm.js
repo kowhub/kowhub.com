@@ -33,13 +33,16 @@ const SignUpForm = () => {
     evt.preventDefault()
     const { username, email, password } = state
     try {
-      await Auth.signUp({
+      const { userConfirmed } = await Auth.signUp({
         username,
         password,
         attributes: {
           email
         }
       })
+      if (userConfirmed) {
+      } else {
+      }
     } catch (err) {
       console.log('error creating account, ', err)
     }
@@ -47,6 +50,8 @@ const SignUpForm = () => {
 
   return (
     <div class="sign_up_form">
+      <h3>Sign Up</h3>
+
       <form onSubmit={createAccount}>
         <div class="sign_up_form__input">
           <label for="username">Username</label>
@@ -91,7 +96,7 @@ const SignUpForm = () => {
 
       <div class="sign_up_form__link">
         Already have an account?
-        <Link to="/">  Sign in</Link>
+        <Link to="/login">  Login</Link>
       </div>
     </div>
   )
