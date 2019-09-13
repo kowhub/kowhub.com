@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.scss';
 
@@ -13,16 +13,16 @@ const App = () => {
   console.log('User: ' + user);
 
   return !user ? (
-    <HashRouter basename='/'>
+    <Router basename='/'>
       <AuthenticationPage />
-    </HashRouter>
+    </Router>
   ) : (
-    <HashRouter basename='/'>
+    <Router basename='/'>
       <div>
         <LogoutButton handleSignout={handleSignout}/>
         <Builder />
       </div>
-    </HashRouter>
+    </Router>
   );
 }
 
