@@ -1,39 +1,29 @@
-import React, { useReducer } from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
+import useAuthenticationInput from './useAuthenticationInput'
 import './LoginForm.scss';
 
-const credentialsReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_INPUT':
-      return { ...state, [action.inputName]: action.inputValue }
-    default:
-      return state
-  }
-}
-
 const LoginForm = () => {
-  const initialState = {
-    username: '',
-    password: ''
-  }
-
-  const [state, dispatch] = useReducer(credentialsReducer, initialState)
+  const { state, setInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    dispatch({
-      type: 'SET_INPUT',
-      inputName: e.target.name,
-      inputValue: e.target.value
+    setInput({
+      name: e.target.name,
+      value: e.target.value
     })
   }
 
   const signIn = async (evt) => {
     evt.preventDefault()
+    evt.stopPropagation()
     const { username, password } = state
     try {
       await Auth.signIn({ username, password })
     } catch (err) {
+      //if (err['__type'] === 'UserNotConfirmedException') {
+        //return <Redirect to='/confirm_sign_up' />
+      //}
       console.log('error signing up user, ', err)
     }
   }

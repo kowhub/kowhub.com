@@ -1,30 +1,16 @@
 import React, { useReducer } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
+import useAuthenticationInput from './useAuthenticationInput'
 import './ConfirmSignUpForm.scss'
 
-const credentialsReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_INPUT':
-      return { ...state, [action.inputName]: action.inputValue }
-    default:
-      return state
-  }
-}
-
 const ConfirmSignUpForm = () => {
-  const initialState = {
-    username: '',
-    code: ''
-  }
-
-  const [state, dispatch] = useReducer(credentialsReducer, initialState)
+  const { state, setInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    dispatch({
-      type: 'SET_INPUT',
-      inputName: e.target.name,
-      inputValue: e.target.value
+    setInput({
+      name: e.target.name,
+      value: e.target.value
     })
   }
 
@@ -47,7 +33,7 @@ const ConfirmSignUpForm = () => {
 
   return (
     <div class="confirm_sign_up_form">
-      <h3>Confirm Sign Up</h3>
+      <h3>Confirm sign up</h3>
 
       <form onSubmit={confirmSignUp}>
         <div class="confirm_sign_up_form__input">
@@ -63,10 +49,10 @@ const ConfirmSignUpForm = () => {
         </div>
 
         <div class="confirm_sign_up_form__input">
-          <label for="confirmation">Confirmation Code</label>
+          <label for="code">Confirmation Code</label>
           <input
             type="text"
-            name="confirmation"
+            name="code"
             placeholder="Enter your code"
             value={state.code}
             onChange={onChange}

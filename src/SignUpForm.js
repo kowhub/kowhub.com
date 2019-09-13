@@ -1,36 +1,22 @@
 import React, { useReducer } from 'react'
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
+import useAuthenticationInput from './useAuthenticationInput'
 import './SignUpForm.scss'
 
-const credentialsReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_INPUT':
-      return { ...state, [action.inputName]: action.inputValue }
-    default:
-      return state
-  }
-}
-
 const SignUpForm = () => {
-  const initialState = {
-    username: '',
-    email: '',
-    password: ''
-  }
-
-  const [state, dispatch] = useReducer(credentialsReducer, initialState)
+  const { state, setInput } = useAuthenticationInput()
 
   const onChange = (e) => {
-    dispatch({
-      type: 'SET_INPUT',
-      inputName: e.target.name,
-      inputValue: e.target.value
+    setInput({
+      name: e.target.name,
+      value: e.target.value
     })
   }
 
   const createAccount = async (evt) => {
     evt.preventDefault()
+    evt.stopPropagation()
     const { username, email, password } = state
     try {
       const { userConfirmed } = await Auth.signUp({
@@ -50,7 +36,7 @@ const SignUpForm = () => {
 
   return (
     <div class="sign_up_form">
-      <h3>Sign Up</h3>
+      <h3>Create account</h3>
 
       <form onSubmit={createAccount}>
         <div class="sign_up_form__input">
