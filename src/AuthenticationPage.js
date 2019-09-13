@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import ConfirmSignUpForm from './ConfirmSignUpForm'
@@ -11,10 +11,15 @@ const AuthenticationPage = () => {
     <div class="authentication_page">
       <div>
         <h1>Kowhub</h1>
-        <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/sign_up" component={SignUpForm} />
-        <Route exact path="/confirm_sign_up" component={ConfirmSignUpForm} />
-        <Route exact path="/resend_sign_up" component={ResendSignUpForm} />
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/sign_up" component={SignUpForm} />
+          <Route exact path="/confirm_sign_up" component={ConfirmSignUpForm} />
+          <Route exact path="/resend_sign_up" component={ResendSignUpForm} />
+          <Route render={() => (
+            <Redirect to="/login" />
+          )}/>
+        </Switch>
       </div>
     </div>
   )

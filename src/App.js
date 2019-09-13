@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
 
@@ -12,17 +11,15 @@ const App = () => {
   const { state: { isLoading, isError, user}, handleSignout } = useAmplifyAuth();
   console.log('User: ' + user);
 
-  return !user ? (
-    <Router basename='/'>
-      <AuthenticationPage />
-    </Router>
-  ) : (
-    <Router basename='/'>
-      <div>
-        <LogoutButton handleSignout={handleSignout}/>
-        <Builder />
-      </div>
-    </Router>
+  if (!user) {
+    return <AuthenticationPage />
+  }
+
+  return  (
+    <div>
+      <LogoutButton handleSignout={handleSignout}/>
+      <Builder />
+    </div>
   );
 }
 
