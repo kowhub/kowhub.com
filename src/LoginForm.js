@@ -73,8 +73,8 @@ const LoginForm = () => {
       </form>
 
       <div class="login_form__link">
-        Don't have an account?
-        <Link to="/signup">  Create one</Link>
+        Don't have an account?{" "}
+        <Link to="/sign_up">Create account</Link>
       </div>
     </div>
   )

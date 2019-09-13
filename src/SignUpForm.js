@@ -95,8 +95,13 @@ const SignUpForm = () => {
       </form>
 
       <div class="sign_up_form__link">
-        Already have an account?
-        <Link to="/login">  Login</Link>
+        Already have an account?{" "}
+        <Link to="/login">Login</Link>
+      </div>
+
+      <div class="sign_up_form__link">
+        Already received a validation code?{" "}
+        <Link to="/confirm_sign_up">Confirm sign up</Link>
       </div>
     </div>
   )

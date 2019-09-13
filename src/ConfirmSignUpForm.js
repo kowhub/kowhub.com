@@ -80,7 +80,13 @@ const ConfirmSignUpForm = () => {
       </form>
 
       <div class="confirm_sign_up_form__link">
-        Already have an account? <Link to="/login">Login</Link>
+        Lost your code?{" "}
+        <Link to="/resend_sign_up">Resend</Link>
+      </div>
+
+      <div class="confirm_sign_up_form__link">
+        Already have an account?{" "}
+        <Link to="/login">Login</Link>
       </div>
     </div>
   )

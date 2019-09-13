@@ -1,2 +1,30 @@
 .resend_sign_up_form {
+  & > form {
+    text-align: left;
+    margin: auto;
+    display: inline-block;
+    width: 150px;
+
+    .resend_sign_up_form__input {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .resend_sign_up_form__button {
+      text-align: center;
+
+      & > button {
+        display: inline-block;
+        width: 120px;
+        height: 35px;
+      }
+    }
+  }
+
+  .resend_sign_up_form__link {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 12px;
+  }
 }
