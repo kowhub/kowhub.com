@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Builder from './builder/Builder'
-import useAmplifyAuth from './useAmplifyAuth'
-import AuthenticationPage from './AuthenticationPage'
+import useAmplifyAuth from './authentication/useAmplifyAuth'
+import AuthenticationPage from './authentication/AuthenticationPage'
 import AppHeader from './AppHeader'
 import './App.scss'
 
