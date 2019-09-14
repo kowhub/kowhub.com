@@ -8,7 +8,7 @@ if test -f "$AWS_EXPORTS_JS"; then
 fi
 
 cat > $AWS_BUILD_CONFIG_JS <<- EOM
-export default const awsmobile = {
+const awsmobile = {
     "aws_project_region": "$AWS_PROJECT_REGION",
     "aws_cognito_identity_pool_id": "$AWS_COGNITO_IDENTITY_POOL_ID",
     "aws_cognito_region": "$AWS_COGNITO_REGION",
@@ -16,4 +16,5 @@ export default const awsmobile = {
     "aws_user_pools_web_client_id": "$AWS_USER_POOLS_WEB_CLIENT_ID",
     "oauth": {}
 };
+export default awsmobile;
 EOM
