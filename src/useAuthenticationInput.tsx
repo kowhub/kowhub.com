@@ -12,7 +12,7 @@ const useAuthenticationInput = () => {
     code: ''
   }
 
-  const [input, dispatch] = useReducer(inputReducer, initialState);
+  const [input, dispatch] = useReducer(inputReducer, initialState)
 
   const updateInput = ({ name, value }) => {
     if (initialState.hasOwnProperty(name)) {

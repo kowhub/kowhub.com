@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
-import './AuthenticationForm.scss';
+import './AuthenticationForm.scss'
 
 const LoginForm = () => {
   const [ errorMessage, setErrorMessage ] = useState('')

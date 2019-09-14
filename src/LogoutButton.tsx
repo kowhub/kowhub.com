@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const LogoutButton = ({handleSignout}) => {
   return (
@@ -8,4 +8,4 @@ const LogoutButton = ({handleSignout}) => {
   )
 }
 
-export default LogoutButton;
+export default LogoutButton

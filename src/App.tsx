@@ -7,8 +7,8 @@ import useAmplifyAuth from './useAmplifyAuth'
 import AuthenticationPage from './AuthenticationPage'
 
 const App = () => {
-  const { state: { user, /*isLoading, isError*/ }, handleSignout } = useAmplifyAuth();
-  console.log('User: ' + user);
+  const { state: { user, /*isLoading, isError*/ }, handleSignout } = useAmplifyAuth()
+  console.log('User: ' + user)
 
   if (!user) {
     return <AuthenticationPage />
@@ -19,7 +19,7 @@ const App = () => {
       <LogoutButton handleSignout={handleSignout}/>
       <Builder />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
