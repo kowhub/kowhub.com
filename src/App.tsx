@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
 
 import Builder from './Builder'
@@ -8,7 +7,7 @@ import useAmplifyAuth from './useAmplifyAuth'
 import AuthenticationPage from './AuthenticationPage'
 
 const App = () => {
-  const { state: { isLoading, isError, user}, handleSignout } = useAmplifyAuth();
+  const { state: { user, /*isLoading, isError*/ }, handleSignout } = useAmplifyAuth();
   console.log('User: ' + user);
 
   if (!user) {

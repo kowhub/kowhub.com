@@ -34,14 +34,14 @@ const ConfirmSignUpForm = () => {
   }
 
   return (
-    <div class="auth_form">
+    <div className="auth_form">
       <h3>Confirm sign up</h3>
 
-      <div class="auth_msg">{errorMessage}</div>
+      <div className="auth_msg">{errorMessage}</div>
 
       <form onSubmit={confirmSignUp}>
-        <div class="auth_form__input">
-          <label for="username">Username</label>
+        <div className="auth_form__input">
+          <label>Username</label>
           <input
             type="text"
             name="username"
@@ -52,8 +52,8 @@ const ConfirmSignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__input">
-          <label for="code">Confirmation Code</label>
+        <div className="auth_form__input">
+          <label>Confirmation Code</label>
           <input
             type="text"
             name="code"
@@ -64,17 +64,17 @@ const ConfirmSignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__button">
+        <div className="auth_form__button">
           <button type="submit">Confirm</button>
         </div>
       </form>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Lost your code?{" "}
         <Link to="/resend_sign_up">Resend</Link>
       </div>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Already have an account?{" "}
         <Link to="/login">Login</Link>
       </div>

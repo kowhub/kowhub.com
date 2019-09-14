@@ -37,14 +37,14 @@ const LoginForm = () => {
   }
 
   return (
-    <div class="auth_form">
+    <div className="auth_form">
       <h3>Login</h3>
 
-      <div class="auth_msg">{errorMessage}</div>
+      <div className="auth_msg">{errorMessage}</div>
 
       <form onSubmit={signIn}>
-        <div class="auth_form__input">
-          <label for="username">Username</label>
+        <div className="auth_form__input">
+          <label>Username</label>
           <input
             type="text"
             name="username"
@@ -55,8 +55,8 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="auth_form__input">
-          <label for="password">Password</label>
+        <div className="auth_form__input">
+          <label>Password</label>
           <input
             type="password"
             name="password"
@@ -67,12 +67,12 @@ const LoginForm = () => {
           />
         </div>
 
-        <div class="auth_form__button">
+        <div className="auth_form__button">
           <button type="submit">Login</button>
         </div>
       </form>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Don't have an account?{" "}
         <Link to="/sign_up">Create account</Link>
       </div>

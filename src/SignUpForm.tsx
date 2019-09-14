@@ -38,14 +38,14 @@ const SignUpForm = () => {
   }
 
   return (
-    <div class="auth_form">
+    <div className="auth_form">
       <h3>Create account</h3>
 
-      <div class="auth_msg">{errorMessage}</div>
+      <div className="auth_msg">{errorMessage}</div>
 
       <form onSubmit={createAccount}>
-        <div class="auth_form__input">
-          <label for="username">Username</label>
+        <div className="auth_form__input">
+          <label>Username</label>
           <input
             type="text"
             name="username"
@@ -56,8 +56,8 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__input">
-          <label for="email">Email</label>
+        <div className="auth_form__input">
+          <label>Email</label>
           <input
             type="email"
             name="email"
@@ -68,8 +68,8 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__input">
-          <label for="password">Password</label>
+        <div className="auth_form__input">
+          <label>Password</label>
           <input
             type="password"
             name="password"
@@ -80,17 +80,17 @@ const SignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__button">
+        <div className="auth_form__button">
           <button type="submit">Create account</button>
         </div>
       </form>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Already have an account?{" "}
         <Link to="/login">Login</Link>
       </div>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Already received a validation code?{" "}
         <Link to="/confirm_sign_up">Confirm sign up</Link>
       </div>

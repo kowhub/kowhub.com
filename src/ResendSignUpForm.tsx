@@ -34,14 +34,14 @@ const ResendSignUpForm = () => {
   }
 
   return (
-    <div class="auth_form">
+    <div className="auth_form">
       <h3>Resend validation code</h3>
 
-      <div class="auth_msg">{errorMessage}</div>
+      <div className="auth_msg">{errorMessage}</div>
 
       <form onSubmit={resendSignUp}>
-        <div class="auth_form__input">
-          <label for="username">Username</label>
+        <div className="auth_form__input">
+          <label>Username</label>
           <input
             type="text"
             name="username"
@@ -52,17 +52,17 @@ const ResendSignUpForm = () => {
           />
         </div>
 
-        <div class="auth_form__button">
+        <div className="auth_form__button">
           <button type="submit">Resend code</button>
         </div>
       </form>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Already have an account?{" "}
         <Link to="/login">Login</Link>
       </div>
 
-      <div class="auth_form__link">
+      <div className="auth_form__link">
         Not yet signed up?{" "}
         <Link to="/sign_up">Create account</Link>
       </div>

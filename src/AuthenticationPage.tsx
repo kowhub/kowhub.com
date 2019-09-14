@@ -8,7 +8,7 @@ import './AuthenticationPage.scss'
 
 const AuthenticationPage = () => {
   return (
-    <div class="authentication_page">
+    <div className="authentication_page">
       <div>
         <h1>Kowhub</h1>
         <Switch>
