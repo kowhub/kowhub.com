@@ -1,5 +1,9 @@
-.Builder {
+.builder {
   margin: 0;
   display: flex;
   overflow: hidden;
+
+  & > div {
+    margin: 5px;
+  }
 }

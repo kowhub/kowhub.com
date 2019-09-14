@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.scss';
-
-import Builder from './Builder'
-import LogoutButton from './LogoutButton'
+import React from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Builder from './builder/Builder'
 import useAmplifyAuth from './useAmplifyAuth'
 import AuthenticationPage from './AuthenticationPage'
+import AppHeader from './AppHeader'
+import './App.scss'
 
 const App = () => {
   const { state: { user, /*isLoading, isError*/ }, handleSignout } = useAmplifyAuth()
@@ -16,8 +16,13 @@ const App = () => {
 
   return  (
     <div>
-      <LogoutButton handleSignout={handleSignout}/>
-      <Builder />
+      <AppHeader handleSignout={handleSignout} />
+      <Switch>
+        <Route exact path="/builder" component={Builder} />
+        <Route render={() => (
+          <Redirect to="/builder" />
+        )}/>
+      </Switch>
     </div>
   )
 }
