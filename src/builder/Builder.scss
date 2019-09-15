@@ -5,5 +5,10 @@
 
   & > div {
     margin: 5px;
+    border: 2px solid black;
+
+    .selected {
+      border: 1px solid black;
+    }
   }
 }
