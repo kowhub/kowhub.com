@@ -1,9 +1,9 @@
 import React from 'react'
-import CurrentListEntry from './CurrentListEntry'
+import CurrentDraftEntry from './CurrentDraftEntry'
 
 /*
  * State suggestion:
- *  - selected user list
+ *  - selected user draft
  *    {
  *      id: '12345678',
  *      name: 'my list',
@@ -16,7 +16,7 @@ import CurrentListEntry from './CurrentListEntry'
  *
  *    (potentially _just_ the ID to use as reference)
  */
-const CurrentList = ({ currentList, removeUnit }) => {
+const CurrentDraft = ({ draft, removeUnit }) => {
   const removeUnitHandler = (id: string) => {
     return (evt) => {
       evt.preventDefault()
@@ -25,9 +25,9 @@ const CurrentList = ({ currentList, removeUnit }) => {
     }
   }
 
-  const listItems = currentList ? (
-    currentList.units.map((unit) =>
-      <CurrentListEntry
+  const listItems = draft ? (
+    draft.units.map((unit) =>
+      <CurrentDraftEntry
         key={unit.id}
         unitKey={unit.unitKey}
         removeUnit={removeUnitHandler(unit.id)}
@@ -39,11 +39,11 @@ const CurrentList = ({ currentList, removeUnit }) => {
 
   return (
     <div className="current_list">
-      <div><b>CurrentList</b></div>
-      <div>Name: <em>{currentList ? currentList.name : '(no list selected)'}</em></div>
+      <div><b>Current List</b></div>
+      <div>Name: <em>{draft ? draft.name : '(no list selected)'}</em></div>
       <ol>{listItems}</ol>
     </div>
   )
 }
 
-export default CurrentList
+export default CurrentDraft

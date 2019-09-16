@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CurrentListEntry = ({ unitKey, removeUnit }) => {
+const CurrentDraftEntry = ({ unitKey, removeUnit }) => {
   const name = unitKey
 
   return (
@@ -11,4 +11,4 @@ const CurrentListEntry = ({ unitKey, removeUnit }) => {
   )
 }
 
-export default CurrentListEntry
+export default CurrentDraftEntry

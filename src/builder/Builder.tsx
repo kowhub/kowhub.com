@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import Browser from './Browser'
-import UserLists from './UserLists'
-import CurrentList from './CurrentList'
+import UserDrafts from './UserDrafts'
+import CurrentDraft from './CurrentDraft'
 import './Builder.scss'
 
 const newRandomId = () => {
@@ -19,61 +19,67 @@ const removeItem = (list, index) => {
 
 const builderReducer = (state, action) => {
   switch (action.type) {
-    case 'NEW_LIST':
+    case 'NEW_DRAFT': {
       const nextId = newRandomId()
-      const newUserList = { id: nextId, name: 'my list [' + nextId + ']', units: [] }
-      return { ...state, userLists: [...state.userLists, newUserList], currentListId: nextId }
-    case 'REMOVE_LIST':
-      const newLists = state.userLists.filter(l => l.id !== action.id)
+      const newUserDraft = { id: nextId, name: 'my list [' + nextId + ']', units: [] }
+      return { ...state, userDrafts: [...state.userDrafts, newUserDraft], currentDraftId: nextId }
+    }
+    case 'REMOVE_DRAFT': {
+      const newDrafts = state.userDrafts.filter(l => l.id !== action.id)
       let newId
-      if (newLists.length < 1) {
+      if (newDrafts.length < 1) {
         newId = null
-      } else if (action.id === state.currentListId) {
-        newId = newLists[0].id
+      } else if (action.id === state.currentDraftId) {
+        newId = newDrafts[0].id
       } else {
-        newId = state.currentListId
+        newId = state.currentDraftId
       }
-      return { ...state, currentListId: newId, userLists: newLists }
-    case 'SELECT_LIST':
-      return { ...state, currentListId: action.id }
-    case 'ADD_UNIT':
-      const addUnitList = state.userLists.find(l => l.id === state.currentListId)
-      const addUnitListIndex = state.userLists.indexOf(addUnitList)
-      addUnitList.units = [...addUnitList.units, { id: newRandomId(), unitKey: action.unitKey }]
-      return { ...state, userLists: replaceItem(state.userLists, addUnitListIndex, addUnitList) }
-    case 'REMOVE_UNIT':
-      const removeUnitList = state.userLists.find(l => l.id === state.currentListId)
-      const removeUnitListIndex = state.userLists.indexOf(removeUnitList)
-      const unit = removeUnitList.units.find(u => u.id === action.id)
-      const unitIndex = removeUnitList.units.indexOf(unit)
-      removeUnitList.units = removeItem(removeUnitList.units, unitIndex)
-      return { ...state, userLists: replaceItem(state.userLists, removeUnitListIndex, removeUnitList) }
-    default:
+      return { ...state, currentDraftId: newId, userDrafts: newDrafts }
+    }
+    case 'SELECT_DRAFT': {
+      return { ...state, currentDraftId: action.id }
+    }
+    case 'ADD_UNIT': {
+      const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
+      const draftIndex = state.userDrafts.indexOf(draft)
+      draft.units = [...draft.units, { id: newRandomId(), unitKey: action.unitKey }]
+      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, draft) }
+    }
+    case 'REMOVE_UNIT': {
+      const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
+      const draftIndex = state.userDrafts.indexOf(draft)
+      const unit = draft.units.find(u => u.id === action.id)
+      const unitIndex = draft.units.indexOf(unit)
+      draft.units = removeItem(draft.units, unitIndex)
+      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, draft) }
+    }
+    default: {
       throw new Error('Invalid Builder action: ' + action.type)
+    }
   }
 }
 
 const Builder = () => {
   const initialState = {
-    currentListId: null,
-    userLists: []
+    currentDraftId: null,
+    userDrafts: []
   }
 
   const [state, dispatch] = useReducer(builderReducer, initialState)
 
-  const newList = () => {
+  const newDraft = () => {
     console.log('new list')
-    dispatch({ type: 'NEW_LIST' })
+    dispatch({ type: 'NEW_DRAFT' })
   }
 
-  const removeList = (listId: string) => {
-    console.log('remove list: ' + listId)
-    dispatch({ type: 'REMOVE_LIST', id: listId })
+  const removeDraft = (draftId: string) => {
+    console.log('remove list: ' + draftId)
+    dispatch({ type: 'REMOVE_DRAFT', id: draftId })
   }
 
-  const selectList = (listId: string) => {
-    console.log('select list: ' + listId)
-    dispatch({ type: 'SELECT_LIST', id: listId })
+  const selectDraft = (draftId: string) => {
+    console.log('select list: ' + draftId)
+    dispatch({ type: 'SELECT_DRAFT', id: draftId })
   }
 
   const addUnit = (unitKey: string) => {
@@ -88,16 +94,16 @@ const Builder = () => {
 
   return (
     <div className="builder">
-      <UserLists
-        userLists={state.userLists}
-        currentListId={state.currentListId}
-        selectList={selectList}
-        newList={newList}
-        removeList={removeList}
+      <UserDrafts
+        userDrafts={state.userDrafts}
+        currentDraftId={state.currentDraftId}
+        selectDraft={selectDraft}
+        newDraft={newDraft}
+        removeDraft={removeDraft}
       />
       <Browser addUnit={addUnit} />
-      <CurrentList
-        currentList={state.userLists.find(l => l.id === state.currentListId)}
+      <CurrentDraft
+        draft={state.userDrafts.find(l => l.id === state.currentDraftId)}
         removeUnit={removeUnit}
       />
     </div>
