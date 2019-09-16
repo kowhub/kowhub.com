@@ -5,12 +5,20 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
 import Amplify from 'aws-amplify'
 import config from './aws-build-config'
 Amplify.configure(config)
 
+console.log(store.getState())
 ReactDOM.render(
-  <Router basename='/'><App /></Router>,
+  <Router basename='/'>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>,
   document.getElementById('root')
 );
 

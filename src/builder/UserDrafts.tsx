@@ -1,28 +1,13 @@
 import React from 'react'
 import UserDraftEntry from './UserDraftEntry'
+import { connect } from 'react-redux'
+import { addDraft, removeDraft, selectDraft } from '../redux/actions'
 
-/*
- * State suggestion:
- *  - all user drafts
- *    [
- *      {
- *        id: 'draft7000',
- *        name: 'my basilean list',
- *        ...
- *      },
- *      {
- *        id: 'draft7064',
- *        name: 'list for CoK2020',
- *        ...
- *      }
- *    ]
- *  - selected draft ID
- */
-const UserDrafts = ({ userDrafts, currentDraftId, selectDraft, newDraft, removeDraft }) => {
-  const handleNewDraft = (evt) => {
+const UserDrafts = ({ drafts, currentDraftId, selectDraft, addDraft, removeDraft }) => {
+  const handleAddDraft = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    newDraft()
+    addDraft()
   }
 
   const selectDraftHandler = (id: string) => {
@@ -41,7 +26,7 @@ const UserDrafts = ({ userDrafts, currentDraftId, selectDraft, newDraft, removeD
     }
   }
 
-  const listItems = userDrafts.map((draft) =>
+  const listItems = drafts.map((draft) =>
     <UserDraftEntry
       key={draft.id}
       name={draft.name}
@@ -54,13 +39,23 @@ const UserDrafts = ({ userDrafts, currentDraftId, selectDraft, newDraft, removeD
   return (
     <div className="user_drafts">
       <div><b>User Lists</b></div>
-      {userDrafts.length > 0 ? '' : <div> please create a new list </div>}
+      {drafts.length > 0 ? '' : <div> please create a new list </div>}
       <ul>{listItems}</ul>
       <div>
-        <button onClick={handleNewDraft}>NEW LIST</button>
+        <button onClick={handleAddDraft}>NEW LIST</button>
       </div>
     </div>
   )
 }
 
-export default UserDrafts
+const mapStateToProps = ({ builder }) => {
+  return {
+    currentDraftId: builder.currentDraftId,
+    drafts: builder.userDrafts
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { addDraft, removeDraft, selectDraft }
+)(UserDrafts)

@@ -1,0 +1,5 @@
+export const ADD_DRAFT = 'ADD_DRAFT'
+export const REMOVE_DRAFT = 'REMOVE_DRAFT'
+export const SELECT_DRAFT = 'SELECT_DRAFT'
+export const ADD_UNIT = 'ADD_UNIT'
+export const REMOVE_UNIT = 'REMOVE_UNIT'

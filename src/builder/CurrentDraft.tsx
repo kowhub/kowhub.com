@@ -1,21 +1,9 @@
 import React from 'react'
 import CurrentDraftEntry from './CurrentDraftEntry'
+import { connect } from 'react-redux'
+import { removeUnit } from '../redux/actions'
+import { getCurrentDraft } from '../redux/selectors'
 
-/*
- * State suggestion:
- *  - selected user draft
- *    {
- *      id: '12345678',
- *      name: 'my list',
- *      points_limit: 2000,
- *      units: {
- *        'id600': {...},
- *        'id601': {...},
- *      }
- *    }
- *
- *    (potentially _just_ the ID to use as reference)
- */
 const CurrentDraft = ({ draft, removeUnit }) => {
   const removeUnitHandler = (id: string) => {
     return (evt) => {
@@ -46,4 +34,7 @@ const CurrentDraft = ({ draft, removeUnit }) => {
   )
 }
 
-export default CurrentDraft
+export default connect(
+  state => ({ draft: getCurrentDraft(state) }),
+  { removeUnit }
+)(CurrentDraft)
