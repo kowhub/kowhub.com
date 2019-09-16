@@ -42,16 +42,17 @@ const builderReducer = (state, action) => {
     case 'ADD_UNIT': {
       const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
       const draftIndex = state.userDrafts.indexOf(draft)
-      draft.units = [...draft.units, { id: newRandomId(), unitKey: action.unitKey }]
-      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, draft) }
+      const newUnit = { id: newRandomId(), unitKey: action.unitKey }
+      const newDraft = { ...draft, units: [...draft.units, newUnit] }
+      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, newDraft) }
     }
     case 'REMOVE_UNIT': {
       const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
       const draftIndex = state.userDrafts.indexOf(draft)
       const unit = draft.units.find(u => u.id === action.id)
       const unitIndex = draft.units.indexOf(unit)
-      draft.units = removeItem(draft.units, unitIndex)
-      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, draft) }
+      const newDraft = { ...draft, units: removeItem(draft.units, unitIndex) }
+      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, newDraft) }
     }
     default: {
       throw new Error('Invalid Builder action: ' + action.type)
