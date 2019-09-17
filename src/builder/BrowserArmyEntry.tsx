@@ -1,10 +1,10 @@
 import React from 'react'
 
-const BrowserUnitEntry = ({ name, addUnit }) => {
+const BrowserArmyEntry = ({ name, viewUnits }) => {
   const handleClick = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    addUnit()
+    viewUnits()
   }
 
   return (
@@ -15,4 +15,4 @@ const BrowserUnitEntry = ({ name, addUnit }) => {
   )
 }
 
-export default BrowserUnitEntry
+export default BrowserArmyEntry

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { removeUnit } from '../redux/actions'
 import { getCurrentDraft } from '../redux/selectors'
 
-const CurrentDraft = ({ draft, removeUnit }) => {
+const CurrentDraft = ({ dataRepo, draft, removeUnit }) => {
   const removeUnitHandler = (id: string) => {
     return (evt) => {
       evt.preventDefault()

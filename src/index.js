@@ -12,7 +12,6 @@ import Amplify from 'aws-amplify'
 import config from './aws-build-config'
 Amplify.configure(config)
 
-console.log(store.getState())
 ReactDOM.render(
   <Router basename='/'>
     <Provider store={store}>

@@ -1,43 +1,54 @@
-import React from 'react'
-import BrowserUnitEntry from './BrowserUnitEntry'
-import { connect } from 'react-redux'
-import { addUnit } from '../redux/actions'
+import React, { useReducer } from 'react'
+import BrowserArmyPanel from './BrowserArmyPanel'
+import BrowserUnitPanel from './BrowserUnitPanel'
 
-/*
- * State suggestion:
- *  - view type: 'armies_view' vs 'units_view'
- *  - items: ~list of keys~ full data
- *      * (example armies view) ['ba', 'dw', 'ab', ...]
- *      * (example units view) ['dwsb', 'dwib', 'dwog', ...]
- */
-const Browser = ({ addUnit }) => {
-  const units = [
-    'dwsb',
-    'dwib',
-    'dwog',
-    'dwws',
-  ]
-
-  const listItems = units.map((unitKey) => {
-    const unitFormKey = unitKey// + 'r'
-    return (
-      <BrowserUnitEntry
-        key={unitKey}
-        unitFormKey={unitFormKey}
-        addUnit={() => addUnit(unitKey)}
-      />
-    )
-  })
-
-  return (
-    <div className="browser">
-      <div><b>Unit Selector</b></div>
-      <ul>{listItems}</ul>
-    </div>
-  )
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_ARMY_VIEW': {
+      return { ...state, isArmyView: true }
+    }
+    case 'SET_UNIT_VIEW': {
+      return { ...state, isArmyView: false, armyKey: action.key }
+    }
+    default: {
+      return state
+    }
+  }
 }
 
-export default connect(
-  null,
-  { addUnit }
-)(Browser)
+const Browser = ({ dataRepo }) => {
+  const initialState = {
+    isArmyView: true,
+    armyKey: ''
+  }
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  const setArmyView = () => {
+    dispatch({ type: 'SET_ARMY_VIEW' })
+  }
+
+  const setUnitView = (armyKey: string) => {
+    dispatch({ type: 'SET_UNIT_VIEW', key: armyKey })
+  }
+
+  if (state.isArmyView) {
+    const armies = dataRepo.getArmiesList()
+    return (
+      <BrowserArmyPanel
+        armies={armies}
+        setUnitView={setUnitView}
+      />
+    )
+  } else {
+    const units = dataRepo.getUnitsList(state.armyKey)
+    return (
+      <BrowserUnitPanel
+        armyName={dataRepo.names.find(state.armyKey).name}
+        units={units}
+        setArmyView={setArmyView}
+      />
+    )
+  }
+}
+
+export default Browser
