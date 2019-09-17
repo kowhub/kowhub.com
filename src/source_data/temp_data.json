@@ -1,0 +1,44 @@
+{
+  "version": "201910",
+  "armyKeyList": ["dw","ab"],
+  "itemKeyList": ["$blsl"],
+  "armies": {
+    "dw": {
+      "sup": "@crb3",
+      "alignment": "Good",
+      "unitKeyList": ["dwsb","dwra"]
+    },
+    "ab": {
+      "sup": "@crb3",
+      "alignment": "Evil",
+      "unitKeyList": ["abfb","abmo"]
+    }
+  },
+  "units": {
+    "dwsb": {
+      "sup": "@crb3",
+      "army": "dw",
+      "unittype": "Infantry"
+    },
+    "dwra": {
+      "sup": "@crb3",
+      "army": "dw",
+      "unittype": "Infantry"
+    },
+    "abfb": {
+      "sup": "@crb3",
+      "army": "ab",
+      "unittype": "Infantry"
+    },
+    "abmo": {
+      "sup": "@crb3",
+      "army": "ab",
+      "unittype": "Large Infantry"
+    }
+  },
+  "items": {
+    "$blsl": {
+      "sup": "@crb3"
+    }
+  }
+}

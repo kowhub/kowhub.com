@@ -1,0 +1,19 @@
+{
+  "dw": ["The Dwarfs","Dwarfs"],
+  "ab": ["Forces of the Abyss","Abyss"],
+  "dwsb": ["Shieldbreakers",""],
+  "dwra": ["Rangers",""],
+  "abfb": ["Flamebearers",""],
+  "abmo": ["Molochs",""],
+  "^bgs": ["Big Shield",""],
+  "^bla": ["Blast",""],
+  "^bru": ["Brutal",""],
+  "^crs": ["Crushing Strength",""],
+  "^eli": ["Elite",""],
+  "^ens": ["Ensnare",""],
+  "^ein": ["Extremely Inspiring",""],
+  "@crb3": ["Kings of War 3rd edition Rulebook","KoW 3rd ed."],
+  "@aopa": ["Armies of Pannithor",""],
+  "#mawp": ["Mawpup",""],
+  "$blsl": ["Blade of Slashing",""]
+}
