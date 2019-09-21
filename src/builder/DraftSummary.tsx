@@ -1,33 +1,34 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Draft } from '../source_data/Draft'
-import { getCurrentDraft } from '../redux/selectors'
+import { DraftMeta } from '../source_data/Draft'
+import './DraftSummary.scss'
 
 const DraftSummary = (
   props: {
-    draft: Draft | null
+    meta: DraftMeta | null
   }
 ) => {
-  const { draft } = props
+  const { meta } = props
 
-  if (!draft) {
+  if (!meta) {
     return (
       <div className="draft_summary">
-        <div><b>Draft Summary</b></div>
-        <div>(no list selected)</div>
+        <div>
+          <div><b>Draft Summary</b></div>
+          <div>(no list selected)</div>
+        </div>
       </div>
     )
   }
 
   return (
     <div className="draft_summary">
-      <div><b>Draft Summary</b></div>
-      <div>Name: {draft.meta.name}</div>
-      <div>Points limit: {draft.meta.points_limit}</div>
+      <div>
+        <div><b>Draft Summary</b></div>
+        <div>Name: {meta.name}</div>
+        <div>Points: {meta.points_total || 0}/{meta.points_limit}</div>
+      </div>
     </div>
   )
 }
 
-export default connect(
-  state => ({ draft: getCurrentDraft(state) })
-)(DraftSummary)
+export default DraftSummary

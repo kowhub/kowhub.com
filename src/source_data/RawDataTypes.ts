@@ -13,13 +13,13 @@ export type RawData = {
   }
 }
 
-type RawArmy = {
+export type RawArmy = {
   sup: string,
   alignment: string,
   unitKeyList: string[]
 }
 
-type RawUnit = {
+export type RawUnit = {
   sup: string,
   army: string,
   unittype: string,
@@ -28,17 +28,17 @@ type RawUnit = {
   }
 }
 
-type RawUnitForm = {
+export type RawUnitForm = {
   pts: number,
   upgrades: RawUnitUpgrade[]
 }
 
-type RawUnitUpgrade = {
+export type RawUnitUpgrade = {
   key: string,
   pts: number
 }
 
-type RawItem = {
+export type RawItem = {
   sup: string,
   pts: number
 }

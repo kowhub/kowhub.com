@@ -10,6 +10,7 @@ export type DraftMeta = {
   name: string,
   army: string,
   points_limit: number,
+  points_total?: number,
   version: string
 }
 

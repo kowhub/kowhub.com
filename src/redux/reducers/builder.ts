@@ -23,7 +23,7 @@ const removeItem = (list, index) => {
 
 const initialState = {
   currentDraftId: null,
-  userDrafts: []
+  drafts: []
 }
 
 const builderReducer = (state = initialState, action) => {
@@ -34,11 +34,11 @@ const builderReducer = (state = initialState, action) => {
       const meta = { name: 'my list [' + nextId + ']', army: 'dw', points_limit: 2000, version: '201910' }
       const now = '20190920'
       const newUserDraft: Draft = { id: nextId, created_at: now, updated_at: now, meta: meta, units: [] }
-      return { ...state, userDrafts: [...state.userDrafts, newUserDraft], currentDraftId: nextId }
+      return { ...state, drafts: [...state.drafts, newUserDraft], currentDraftId: nextId }
     }
     case REMOVE_DRAFT: {
       const { id } = action.payload
-      const newDrafts = state.userDrafts.filter(l => l.id !== id)
+      const newDrafts = state.drafts.filter(l => l.id !== id)
       let newId
       if (newDrafts.length < 1) {
         newId = null
@@ -47,7 +47,7 @@ const builderReducer = (state = initialState, action) => {
       } else {
         newId = state.currentDraftId
       }
-      return { ...state, currentDraftId: newId, userDrafts: newDrafts }
+      return { ...state, currentDraftId: newId, drafts: newDrafts }
     }
     case SELECT_DRAFT: {
       const { id } = action.payload
@@ -58,20 +58,20 @@ const builderReducer = (state = initialState, action) => {
         return state
       }
       const { unitKeyForm } = action.payload
-      const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
-      const draftIndex = state.userDrafts.indexOf(draft)
+      const draft = state.drafts.find(l => l.id === state.currentDraftId)
+      const draftIndex = state.drafts.indexOf(draft)
       const newUnit = { id: newRandomId(), dna: unitKeyForm }
       const newDraft = { ...draft, units: [...draft.units, newUnit] }
-      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, newDraft) }
+      return { ...state, drafts: replaceItem(state.drafts, draftIndex, newDraft) }
     }
     case REMOVE_UNIT: {
       const { id } = action.payload
-      const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
-      const draftIndex = state.userDrafts.indexOf(draft)
+      const draft = state.drafts.find(l => l.id === state.currentDraftId)
+      const draftIndex = state.drafts.indexOf(draft)
       const unit = draft.units.find(u => u.id === id)
       const unitIndex = draft.units.indexOf(unit)
       const newDraft = { ...draft, units: removeItem(draft.units, unitIndex) }
-      return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, newDraft) }
+      return { ...state, drafts: replaceItem(state.drafts, draftIndex, newDraft) }
     }
     default: {
       return state

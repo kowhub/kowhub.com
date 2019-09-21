@@ -59,14 +59,7 @@ const UserDrafts = (
   )
 }
 
-const mapStateToProps = ({ builder }) => {
-  return {
-    currentDraftId: builder.currentDraftId,
-    drafts: builder.userDrafts
-  }
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   { addDraft, removeDraft, selectDraft }
 )(UserDrafts)

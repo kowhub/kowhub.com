@@ -1,0 +1,9 @@
+.draft_summary {
+  overflow: hidden;
+  display: flex;
+
+  & > div {
+    margin: 5px;
+    border: 2px solid black;
+  }
+}
