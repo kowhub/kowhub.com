@@ -2,15 +2,15 @@ import React from 'react'
 import Browser from './Browser'
 import UserDrafts from './UserDrafts'
 import DraftDetail from './DraftDetail'
-import './Builder.scss'
+import './BuilderApp.scss'
 
 import { createDataRepositoryForVersion } from '../source_data/DataRepositoryFactory'
 
-const Builder = () => {
+const BuilderApp = () => {
   const dataRepo = createDataRepositoryForVersion()
 
   return (
-    <div className="builder">
+    <div className="builder_app">
       <UserDrafts />
       <Browser dataRepo={dataRepo} />
       <DraftDetail dataRepo={dataRepo} />
@@ -18,4 +18,4 @@ const Builder = () => {
   )
 }
 
-export default Builder
+export default BuilderApp

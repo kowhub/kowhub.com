@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Builder from './builder/Builder'
+import BuilderApp from './builder/BuilderApp'
 import useAmplifyAuth from './authentication/useAmplifyAuth'
 import AuthenticationPage from './authentication/AuthenticationPage'
 import AppHeader from './AppHeader'
@@ -18,7 +18,7 @@ const App = () => {
     <div>
       <AppHeader handleSignout={handleSignout} />
       <Switch>
-        <Route exact path="/builder" component={Builder} />
+        <Route exact path="/builder" component={BuilderApp} />
         <Route render={() => (
           <Redirect to="/builder" />
         )}/>
