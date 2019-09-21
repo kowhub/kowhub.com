@@ -2,12 +2,20 @@ import React from 'react'
 import BrowserArmyEntry from './BrowserArmyEntry'
 
 const BrowserArmyPanel = ({ armies, setUnitView }) => {
+  const viewUnitsHandler = (armyKey: string) => {
+    return (evt) => {
+      evt.preventDefault()
+      evt.stopPropagation()
+      setUnitView(armyKey)
+    }
+  }
+
   const renderItems = armies.map((army) => {
     return (
       <BrowserArmyEntry
         key={army.key}
         name={army.name}
-        viewUnits={() => setUnitView(army.key)}
+        viewUnits={viewUnitsHandler(army.key)}
       />
     )
   })

@@ -3,29 +3,48 @@ import BrowserUnitEntry from './BrowserUnitEntry'
 import { connect } from 'react-redux'
 import { addUnit } from '../redux/actions'
 
-const BrowserUnitPanel = ({ addUnit, armyName, units, setArmyView }) => {
-  const renderItems = units.map((unit) => {
-    return (
-      <BrowserUnitEntry
-        key={unit.key}
-        name={unit.name}
-        addUnit={() => addUnit(unit.key)}
-      />
-    )
-  })
+const BrowserUnitPanel = (
+  props: {
+    addUnit(unitKeyForm: string): void,
+    armyName: string,
+    units,
+    setArmyView(): void
+  }
+) => {
+  const { addUnit, armyName, units, setArmyView } = props
 
-  const handleClick = (evt) => {
+  const handleSelectArmyView = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
     setArmyView()
   }
+
+  const addUnitHandler = (unitKeyForm: string) => {
+    return (evt) => {
+      evt.preventDefault()
+      evt.stopPropagation()
+      addUnit(unitKeyForm)
+    }
+  }
+
+  const renderItems = units.map((unit) => {
+    const formKey = Object.keys(unit.forms)[0] // pick only the first form
+    const unitKeyForm = unit.key + formKey
+    return (
+      <BrowserUnitEntry
+        key={unitKeyForm}
+        name={unit.name}
+        addUnit={addUnitHandler(unitKeyForm)}
+      />
+    )
+  })
 
   return (
     <div className="browser">
       <div><b>{armyName}</b></div>
       <ul>{renderItems}</ul>
       <div>
-        <button onClick={handleClick}>BACK TO ARMIES</button>
+        <button onClick={handleSelectArmyView}>BACK TO ARMIES</button>
       </div>
     </div>
   )

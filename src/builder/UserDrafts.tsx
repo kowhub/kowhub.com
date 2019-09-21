@@ -1,9 +1,20 @@
 import React from 'react'
 import UserDraftEntry from './UserDraftEntry'
+import { Draft } from '../source_data/Draft'
 import { connect } from 'react-redux'
 import { addDraft, removeDraft, selectDraft } from '../redux/actions'
 
-const UserDrafts = ({ drafts, currentDraftId, selectDraft, addDraft, removeDraft }) => {
+const UserDrafts = (
+  props: {
+    drafts: Draft[],
+    currentDraftId: string,
+    selectDraft(id: string): void,
+    addDraft(): void,
+    removeDraft(id: string): void
+  }
+) => {
+  const { drafts, currentDraftId, selectDraft, addDraft, removeDraft } = props
+
   const handleAddDraft = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
@@ -29,7 +40,7 @@ const UserDrafts = ({ drafts, currentDraftId, selectDraft, addDraft, removeDraft
   const listItems = drafts.map((draft) =>
     <UserDraftEntry
       key={draft.id}
-      name={draft.name}
+      meta={draft.meta}
       isSelected={draft.id === currentDraftId}
       selectDraft={selectDraftHandler(draft.id)}
       removeDraft={removeDraftHandler(draft.id)}

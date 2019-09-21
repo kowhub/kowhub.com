@@ -18,27 +18,76 @@
     "dwsb": {
       "sup": "@crb3",
       "army": "dw",
-      "unittype": "Infantry"
+      "unittype": "Infantry",
+      "forms": {
+        "t": {
+          "pts": 90,
+          "upgrades": [
+            { "key": "#mawp", "pts": 5 }
+          ]
+        },
+        "r": {
+          "pts": 95,
+          "upgrades": [
+            { "key": "#mawp", "pts": 5 }
+          ]
+        }
+      }
     },
     "dwra": {
       "sup": "@crb3",
       "army": "dw",
-      "unittype": "Infantry"
+      "unittype": "Infantry",
+      "forms": {
+        "t": {
+          "pts": 100,
+          "upgrades": [
+            { "key": "#mawp", "pts": 5 }
+          ]
+        },
+        "r": {
+          "pts": 105,
+          "upgrades": [
+            { "key": "#mawp", "pts": 5 }
+          ]
+        }
+      }
     },
     "abfb": {
       "sup": "@crb3",
       "army": "ab",
-      "unittype": "Infantry"
+      "unittype": "Infantry",
+      "forms": {
+        "t": {
+          "pts": 110,
+          "upgrades": []
+        },
+        "r": {
+          "pts": 115,
+          "upgrades": []
+        }
+      }
     },
     "abmo": {
       "sup": "@crb3",
       "army": "ab",
-      "unittype": "Large Infantry"
+      "unittype": "Large Infantry",
+      "forms": {
+        "t": {
+          "pts": 120,
+          "upgrades": []
+        },
+        "r": {
+          "pts": 125,
+          "upgrades": []
+        }
+      }
     }
   },
   "items": {
     "$blsl": {
-      "sup": "@crb3"
+      "sup": "@crb3",
+      "pts": 5
     }
   }
 }

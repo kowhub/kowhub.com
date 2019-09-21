@@ -1,4 +1,4 @@
-import { KowNames } from './KowNameTypes'
+import { RawNames } from './RawNameTypes'
 
 type NameStruct = {
   name: string,
@@ -6,7 +6,7 @@ type NameStruct = {
 }
 
 export class NameRepository {
-  constructor(private readonly names: KowNames) {}
+  constructor(private readonly names: RawNames) {}
 
   public find(key: string): NameStruct {
     const entry = this.names[key]

@@ -1,7 +1,7 @@
 import React from 'react'
 import Browser from './Browser'
 import UserDrafts from './UserDrafts'
-import CurrentDraft from './CurrentDraft'
+import DraftDetail from './DraftDetail'
 import './Builder.scss'
 
 import { createDataRepositoryForVersion } from '../source_data/DataRepositoryFactory'
@@ -13,7 +13,7 @@ const Builder = () => {
     <div className="builder">
       <UserDrafts />
       <Browser dataRepo={dataRepo} />
-      <CurrentDraft dataRepo={dataRepo} />
+      <DraftDetail dataRepo={dataRepo} />
     </div>
   )
 }

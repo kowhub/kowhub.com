@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
-const BrowserArmyEntry = ({ name, viewUnits }) => {
-  const handleClick = (evt) => {
-    evt.preventDefault()
-    evt.stopPropagation()
-    viewUnits()
+const BrowserArmyEntry = (
+  props: {
+    name: string,
+    viewUnits(evt: MouseEvent): void
   }
-
+) => {
+  const { name, viewUnits } = props
   return (
     <li>
-      <button onClick={handleClick}>+</button>
+      <button onClick={viewUnits}>+</button>
       {name}
     </li>
   )

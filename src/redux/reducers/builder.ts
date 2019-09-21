@@ -1,3 +1,5 @@
+import { Draft } from '../../source_data/Draft'
+
 import {
   ADD_DRAFT,
   REMOVE_DRAFT,
@@ -29,7 +31,9 @@ const builderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_DRAFT: {
       const nextId = newRandomId()
-      const newUserDraft = { id: nextId, name: 'my list [' + nextId + ']', units: [] }
+      const meta = { name: 'my list [' + nextId + ']', army: 'dw', points_limit: 2000, version: '201910' }
+      const now = '20190920'
+      const newUserDraft: Draft = { id: nextId, created_at: now, updated_at: now, meta: meta, units: [] }
       return { ...state, userDrafts: [...state.userDrafts, newUserDraft], currentDraftId: nextId }
     }
     case REMOVE_DRAFT: {
@@ -53,10 +57,10 @@ const builderReducer = (state = initialState, action) => {
       if (!state.currentDraftId) {
         return state
       }
-      const { unitKey } = action.payload
+      const { unitKeyForm } = action.payload
       const draft = state.userDrafts.find(l => l.id === state.currentDraftId)
       const draftIndex = state.userDrafts.indexOf(draft)
-      const newUnit = { id: newRandomId(), unitKey: unitKey }
+      const newUnit = { id: newRandomId(), dna: unitKeyForm }
       const newDraft = { ...draft, units: [...draft.units, newUnit] }
       return { ...state, userDrafts: replaceItem(state.userDrafts, draftIndex, newDraft) }
     }

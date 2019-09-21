@@ -1,3 +1,3 @@
-export interface KowNames {
+export interface RawNames {
   [key: string]: string[]
 }

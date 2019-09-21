@@ -24,10 +24,10 @@ export const selectDraft = (draftId: string) => ({
   }
 })
 
-export const addUnit = (unitKey: string) => ({
+export const addUnit = (unitKeyForm: string) => ({
   type: ADD_UNIT,
   payload: {
-    unitKey: unitKey
+    unitKeyForm: unitKeyForm
   }
 })
 
