@@ -2,6 +2,7 @@ import React from 'react'
 import Browser from './Browser'
 import UserDrafts from './UserDrafts'
 import DraftDetail from './DraftDetail'
+import DraftSummary from './DraftSummary'
 import './BuilderApp.scss'
 
 import { createDataRepositoryForVersion } from '../source_data/DataRepositoryFactory'
@@ -14,6 +15,7 @@ const BuilderApp = () => {
       <UserDrafts />
       <Browser dataRepo={dataRepo} />
       <DraftDetail dataRepo={dataRepo} />
+      <DraftSummary />
     </div>
   )
 }
