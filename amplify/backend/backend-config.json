@@ -1,9 +1,0 @@
-{
-	"auth": {
-		"kowhubcom6009e045": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	}
-}
