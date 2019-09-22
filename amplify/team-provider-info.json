@@ -15,5 +15,22 @@
                 "kowhubcom87fc7cf8": {}
             }
         }
+    },
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "kowhubcom-master-20190922160700-authRole",
+            "UnauthRoleArn": "arn:aws:iam::827477613476:role/kowhubcom-master-20190922160700-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::827477613476:role/kowhubcom-master-20190922160700-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "kowhubcom-master-20190922160700-deployment",
+            "UnauthRoleName": "kowhubcom-master-20190922160700-unauthRole",
+            "StackName": "kowhubcom-master-20190922160700",
+            "StackId": "arn:aws:cloudformation:us-east-1:827477613476:stack/kowhubcom-master-20190922160700/93e4b660-dd07-11e9-9cd2-128a65397f5a"
+        },
+        "categories": {
+            "auth": {
+                "kowhubcom87fc7cf8": {}
+            }
+        }
     }
 }
