@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "kowhubcom-dev-20190922154142-authRole",
+            "UnauthRoleArn": "arn:aws:iam::827477613476:role/kowhubcom-dev-20190922154142-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::827477613476:role/kowhubcom-dev-20190922154142-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "kowhubcom-dev-20190922154142-deployment",
+            "UnauthRoleName": "kowhubcom-dev-20190922154142-unauthRole",
+            "StackName": "kowhubcom-dev-20190922154142",
+            "StackId": "arn:aws:cloudformation:us-east-1:827477613476:stack/kowhubcom-dev-20190922154142/0b6b7470-dd04-11e9-809c-0ed829f607b4"
+        }
+    }
+}
