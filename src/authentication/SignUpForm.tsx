@@ -23,17 +23,13 @@ const SignUpForm = () => {
     const { username, email, password } = input
     try {
       const { userConfirmed } = await Auth.signUp({
-        username,
+        username: email,
         password,
         attributes: {
-          email
+          preferred_username: username
         }
       })
-      if (userConfirmed) {
-        setNextStage('CONFIRM_SIGN_UP')
-      } else {
-        setErrorMessage('error signing up')
-      }
+      setNextStage('CONFIRM_SIGN_UP')
     } catch (err) {
       setErrorMessage(err.message)
     }

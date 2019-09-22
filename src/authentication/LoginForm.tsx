@@ -20,9 +20,12 @@ const LoginForm = () => {
   const signIn = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username, password } = input
+    const { email, password } = input
     try {
-      await Auth.signIn({ username, password })
+      await Auth.signIn({
+        username: email,
+        password: password
+      })
     } catch (err) {
       if (err.code === 'UserNotConfirmedException') {
         setNextStage('CONFIRM_SIGN_UP')
@@ -44,12 +47,12 @@ const LoginForm = () => {
 
       <form onSubmit={signIn}>
         <div className="auth_form__input">
-          <label>Username</label>
+          <label>Email</label>
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={input.username}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={input.email}
             onChange={onChange}
             required
           />

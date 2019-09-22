@@ -20,9 +20,9 @@ const ResendSignUpForm = () => {
   const resendSignUp = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username } = input
+    const { email } = input
     try {
-      await Auth.resendSignUp(username)
+      await Auth.resendSignUp(email)
       setNextStage('CONFIRM_SIGN_UP')
     } catch (err) {
       setErrorMessage(err.message)
@@ -41,12 +41,12 @@ const ResendSignUpForm = () => {
 
       <form onSubmit={resendSignUp}>
         <div className="auth_form__input">
-          <label>Username</label>
+          <label>Email</label>
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={input.username}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={input.email}
             onChange={onChange}
             required
           />

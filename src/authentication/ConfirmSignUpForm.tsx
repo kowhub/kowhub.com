@@ -20,9 +20,9 @@ const ConfirmSignUpForm = () => {
   const confirmSignUp = async (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    const { username, code } = input
+    const { email, code } = input
     try {
-      await Auth.confirmSignUp(username, code)
+      await Auth.confirmSignUp(email, code)
       setNextStage('LOGIN')
     } catch (err) {
       setErrorMessage(err.message)
@@ -41,12 +41,12 @@ const ConfirmSignUpForm = () => {
 
       <form onSubmit={confirmSignUp}>
         <div className="auth_form__input">
-          <label>Username</label>
+          <label>Email</label>
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={input.username}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={input.email}
             onChange={onChange}
             required
           />
