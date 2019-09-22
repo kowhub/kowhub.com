@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Auth } from 'aws-amplify'
 import useAuthenticationInput from './useAuthenticationInput'
 import './AuthenticationForm.scss'
 
 const SignUpForm = () => {
   const [ errorMessage, setErrorMessage ] = useState('')
-  //const [ nextStage, setNextStage ] = useState('')
+  const [ nextStage, setNextStage ] = useState('')
 
   const { input, updateInput } = useAuthenticationInput()
 
@@ -30,11 +30,17 @@ const SignUpForm = () => {
         }
       })
       if (userConfirmed) {
+        setNextStage('CONFIRM_SIGN_UP')
       } else {
+        setErrorMessage('error signing up')
       }
     } catch (err) {
       setErrorMessage(err.message)
     }
+  }
+
+  if (nextStage === 'CONFIRM_SIGN_UP') {
+    return <Redirect to='/confirm_sign_up' />
   }
 
   return (
