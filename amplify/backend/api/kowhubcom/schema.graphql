@@ -1,0 +1,14 @@
+type Draft @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  createdAt: String
+  updatedAt: String
+  meta: DraftMeta!
+  units: [String!]!
+}
+
+type DraftMeta {
+  name: String!
+  army: String!
+  pointsLimit: Int!
+  kowVersion: String!
+}

@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "kowhubcom",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authkowhubcom87fc7cf8",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
