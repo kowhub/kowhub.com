@@ -1,7 +1,7 @@
 import React from 'react'
 import DraftDetailUnitEntry from './DraftDetailUnitEntry'
 import { connect } from 'react-redux'
-import { removeUnit } from '../redux/actions'
+import useRemoveUnit from '../apollo/hooks/useRemoveUnit'
 import { DraftUnit } from '../source_data/Draft'
 import { DataRepository } from '../source_data/DataRepository'
 
@@ -9,10 +9,11 @@ const DraftDetailUnits = (
   props: {
     dataRepo: DataRepository,
     units: DraftUnit[],
-    removeUnit(id: string): void
   }
 ) => {
-  const { dataRepo, units, removeUnit } = props
+  const { dataRepo, units } = props
+
+  const { removeUnit } = useRemoveUnit()
 
   const removeUnitHandler = (id: string) => {
     return (evt) => {
@@ -37,7 +38,4 @@ const DraftDetailUnits = (
   )
 }
 
-export default connect(
-  null,
-  { removeUnit }
-)(DraftDetailUnits)
+export default DraftDetailUnits

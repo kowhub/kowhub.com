@@ -1,31 +1,37 @@
 import React from 'react'
 import UserDraftEntry from './UserDraftEntry'
 import { Draft } from '../source_data/Draft'
-import { connect } from 'react-redux'
-import { addDraft, removeDraft, selectDraft } from '../redux/actions'
+import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
+import useCreateDraft from '../apollo/hooks/useCreateDraft'
+import useDeleteDraft from '../apollo/hooks/useDeleteDraft'
 
 const UserDrafts = (
   props: {
     drafts: Draft[],
     currentDraftId: string,
-    selectDraft(id: string): void,
-    addDraft(): void,
-    removeDraft(id: string): void
   }
 ) => {
-  const { drafts, currentDraftId, selectDraft, addDraft, removeDraft } = props
+  const { drafts, currentDraftId } = props
+
+  const { setCurrentDraftId } = useCurrentDraftId()
+  const { createDraft } = useCreateDraft()
+  const { deleteDraft } = useDeleteDraft()
 
   const handleAddDraft = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    addDraft()
+    createDraft({
+      name: 'October Revamp with Apollo!',
+      pointsLimit: 2000,
+      kowVersion: '201910'
+    })
   }
 
   const selectDraftHandler = (id: string) => {
     return (evt) => {
       evt.preventDefault()
       evt.stopPropagation()
-      selectDraft(id)
+      setCurrentDraftId(id)
     }
   }
 
@@ -33,7 +39,7 @@ const UserDrafts = (
     return (evt) => {
       evt.preventDefault()
       evt.stopPropagation()
-      removeDraft(id)
+      deleteDraft(id)
     }
   }
 
@@ -59,7 +65,4 @@ const UserDrafts = (
   )
 }
 
-export default connect(
-  null,
-  { addDraft, removeDraft, selectDraft }
-)(UserDrafts)
+export default UserDrafts

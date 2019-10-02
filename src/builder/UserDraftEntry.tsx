@@ -14,7 +14,7 @@ const UserDraftEntry = (
   return (
     <li onClick={selectDraft} className={isSelected ? 'selected' : null}>
       <button onClick={removeDraft}>X</button>
-      {meta.name}
+      { '[' + meta.pointsLimit + '] ' + meta.name }
     </li>
   )
 }

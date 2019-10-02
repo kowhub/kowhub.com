@@ -1,6 +1,7 @@
 import React from 'react'
 import { DraftMeta } from '../source_data/Draft'
 import './DraftSummary.scss'
+import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 
 const DraftSummary = (
   props: {
@@ -25,7 +26,7 @@ const DraftSummary = (
       <div>
         <div><b>Draft Summary</b></div>
         <div>Name: {meta.name}</div>
-        <div>Points: {meta.points_total || 0}/{meta.points_limit}</div>
+        <div>Points: {meta.pointsTotal || 0}/{meta.pointsLimit}</div>
       </div>
     </div>
   )

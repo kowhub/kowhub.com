@@ -12,24 +12,38 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.1",
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-cache-persist": "^0.1.1",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
     "aws-amplify": "^1.1.38",
     "aws-amplify-react": "^2.4.2",
+    "aws-appsync": "^2.0.0",
+    "aws-appsync-react": "^2.0.0",
+    "graphql-tag": "^2.10.1",
+    "localforage": "^1.7.3",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
+    "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
     "redux": "^4.0.4",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "redux-devtools": "^3.5.0",
     "redux-devtools-extension": "^2.13.8"
+  },
+  "resolutions": {
+    "apollo-client": "2.6.4"
   },
   "eslintConfig": {
     "extends": "react-app"

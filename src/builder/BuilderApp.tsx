@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Browser from './Browser'
 import UserDrafts from './UserDrafts'
 import DraftDetail from './DraftDetail'
@@ -8,19 +7,24 @@ import { DataRepository } from '../source_data/DataRepository'
 import { Draft } from '../source_data/Draft'
 import './BuilderApp.scss'
 
+import useUserDrafts from '../apollo/hooks/useUserDrafts'
+import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
+
+
 const BuilderApp = (
   props: {
     dataRepo: DataRepository,
-    drafts: Draft[],
-    currentDraftId: string
   }
 ) => {
-  const { dataRepo, drafts, currentDraftId } = props
+  const { dataRepo } = props
+
+  const { drafts, loading, error } = useUserDrafts()
+  const { currentDraftId } = useCurrentDraftId()
 
   const currentDraft = drafts.find(draft => draft.id === currentDraftId)
 
   const currentDraftMeta = currentDraft
-    ? { ...currentDraft.meta, points_total: dataRepo.getDraftPoints(currentDraft) }
+    ? { ...currentDraft.meta, pointsTotal: dataRepo.getDraftPoints(currentDraft) }
     : null
 
   const currentDraftUnits = currentDraft ? currentDraft.units : null
@@ -37,9 +41,4 @@ const BuilderApp = (
   )
 }
 
-export default connect(
-  state => ({
-    drafts: state.builder.drafts,
-    currentDraftId: state.builder.currentDraftId
-  })
-)(BuilderApp)
+export default BuilderApp

@@ -25,9 +25,9 @@ const DraftDetail = (
     <div className="current_list">
       <div><b>Current List</b></div>
       <div>Name: <em>{meta.name}</em></div>
-      <div>Points limit: <em>{meta.points_limit}</em></div>
+      <div>Points limit: <em>{meta.pointsLimit}</em></div>
       <DraftDetailUnits dataRepo={dataRepo} units={units} />
-      <div>Points total: <em>{meta.points_total}</em></div>
+      <div>Points total: <em>{meta.pointsTotal}</em></div>
     </div>
   )
 }

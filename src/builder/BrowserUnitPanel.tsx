@@ -1,17 +1,17 @@
 import React from 'react'
 import BrowserUnitEntry from './BrowserUnitEntry'
-import { connect } from 'react-redux'
-import { addUnit } from '../redux/actions'
+import useAddUnit from '../apollo/hooks/useAddUnit'
 
 const BrowserUnitPanel = (
   props: {
-    addUnit(unitKeyForm: string): void,
     armyName: string,
     units,
     setArmyView(): void
   }
 ) => {
-  const { addUnit, armyName, units, setArmyView } = props
+  const { armyName, units, setArmyView } = props
+
+  const { addUnit } = useAddUnit()
 
   const handleSelectArmyView = (evt) => {
     evt.preventDefault()
@@ -50,7 +50,4 @@ const BrowserUnitPanel = (
   )
 }
 
-export default connect(
-  null,
-  { addUnit }
-)(BrowserUnitPanel)
+export default BrowserUnitPanel
