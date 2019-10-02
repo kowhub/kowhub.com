@@ -31,9 +31,9 @@ const builderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_DRAFT: {
       const nextId = newRandomId()
-      const meta = { name: 'my list [' + nextId + ']', army: 'dw', points_limit: 2000, version: '201910' }
+      const meta = { name: 'my list [' + nextId + ']', army: 'dw', pointsLimit: 2000, kowVersion: '201910' }
       const now = '20190920'
-      const newUserDraft: Draft = { id: nextId, created_at: now, updated_at: now, meta: meta, units: [] }
+      const newUserDraft: Draft = { id: nextId, createdAt: now, updatedAt: now, meta: meta, units: [] }
       return { ...state, drafts: [...state.drafts, newUserDraft], currentDraftId: nextId }
     }
     case REMOVE_DRAFT: {

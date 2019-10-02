@@ -1,7 +1,7 @@
 export type Draft = {
   id: string,
-  created_at: string,
-  updated_at: string,
+  createdAt: string,
+  updatedAt: string,
   meta: DraftMeta,
   units: DraftUnit[]
 }
@@ -9,12 +9,12 @@ export type Draft = {
 export type DraftMeta = {
   name: string,
   army: string,
-  points_limit: number,
-  points_total?: number,
-  version: string
+  pointsLimit: number,
+  pointsTotal?: number,
+  kowVersion: string
 }
 
 export type DraftUnit = {
-  id: string,
+  id?: string,
   dna: string
 }

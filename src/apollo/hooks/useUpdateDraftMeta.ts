@@ -15,7 +15,7 @@ const UpdateDraftMutation = gql`
   }
 `
 
-const useUpdateDraftMetaMutation = () => {
+const useUpdateDraftMeta = () => {
   const [ updateDraft, { loading, error }] = useMutation(UpdateDraftMutation)
 
   const updateDraftMeta = ({ id, name, army, pointsLimit, kowVersion }) => {
@@ -37,4 +37,4 @@ const useUpdateDraftMetaMutation = () => {
   return { updateDraftMeta, loading, error }
 }
 
-export default useUpdateDraftMetaMutation
+export default useUpdateDraftMeta

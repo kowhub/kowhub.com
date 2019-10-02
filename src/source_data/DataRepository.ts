@@ -40,7 +40,7 @@ export class DataRepository {
   }
 
   public getDraftPoints(draft: Draft): number {
-    if (draft.meta.version !== this.version) return -1
+    if (draft.meta.kowVersion !== this.version) return -1
 
     return draft.units.reduce((sum, unit) => sum + this.getUnitPoints(unit.dna), 0)
   }
