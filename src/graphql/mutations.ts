@@ -6,13 +6,12 @@ export const createDraft = `mutation CreateDraft($input: CreateDraftInput!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }
@@ -22,13 +21,12 @@ export const updateDraft = `mutation UpdateDraft($input: UpdateDraftInput!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }
@@ -38,13 +36,12 @@ export const deleteDraft = `mutation DeleteDraft($input: DeleteDraftInput!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }

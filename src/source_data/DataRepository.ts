@@ -32,7 +32,7 @@ export class DataRepository {
 
     return army.unitKeyList.map(unitKey => {
       return {
-        ...this.data.units[unitKey],
+        //...this.data.units[unitKey],
         ...this.names.find(unitKey),
         key: unitKey,
       }
@@ -40,9 +40,9 @@ export class DataRepository {
   }
 
   public getDraftPoints(draft: Draft): number {
-    if (draft.meta.kowVersion !== this.version) return -1
+    if (draft.rulesVersion !== this.version) return -1
 
-    return draft.units.reduce((sum, unit) => sum + this.getUnitPoints(unit.dna), 0)
+    return 0//draft.units.reduce((sum, unit) => sum + this.getUnitPoints(unit.dna), 0)
   }
 
   public getUnitPoints(dna: string): number {

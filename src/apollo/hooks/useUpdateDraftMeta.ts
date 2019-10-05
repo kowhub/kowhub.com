@@ -1,34 +1,35 @@
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-const UpdateDraftMutation = gql`
+const UPDATE_DRAFT_META_MUTATION = gql`
   mutation UpdateDraft($input: UpdateDraftInput!) {
     updateDraft(input: $input) {
       id
-      meta {
-        name
-        army
-        pointsLimit
-        kowVersion
-      }
+      name
+      army
+      pointsLimit
+      rulesVersion
+      status
     }
   }
 `
 
 const useUpdateDraftMeta = () => {
-  const [ updateDraft, { loading, error }] = useMutation(UpdateDraftMutation)
+  const [ updateDraft, { loading, error }] = useMutation(UPDATE_DRAFT_META_MUTATION)
 
-  const updateDraftMeta = ({ id, name, army, pointsLimit, kowVersion }) => {
-    const meta = { name, army, pointsLimit, kowVersion }
-
+  const updateDraftMeta = ({ id, name, army, pointsLimit, rulesVersion, status }) => {
     updateDraft({
-      variables: { input: { id, meta } },
+      variables: { input: { id, name, army, pointsLimit, rulesVersion, status } },
       optimisticResponse: {
         __typename: 'Mutation',
         updateDraft: {
           __typename: 'Draft',
           id,
-          meta: { ...meta, __typename: 'DraftMeta' },
+          name,
+          army,
+          pointsLimit,
+          rulesVersion,
+          status
         }
       }
     })

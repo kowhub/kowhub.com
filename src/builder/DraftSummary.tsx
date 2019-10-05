@@ -1,16 +1,16 @@
 import React from 'react'
-import { DraftMeta } from '../source_data/Draft'
+import { Draft } from '../source_data/Draft'
 import './DraftSummary.scss'
 import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 
 const DraftSummary = (
   props: {
-    meta: DraftMeta | null
+    draft: Draft
   }
 ) => {
-  const { meta } = props
+  const { draft } = props
 
-  if (!meta) {
+  if (!draft) {
     return (
       <div className="draft_summary">
         <div>
@@ -25,8 +25,8 @@ const DraftSummary = (
     <div className="draft_summary">
       <div>
         <div><b>Draft Summary</b></div>
-        <div>Name: {meta.name}</div>
-        <div>Points: {meta.pointsTotal || 0}/{meta.pointsLimit}</div>
+        <div>Name: {draft.name}</div>
+        <div>Points: {draft.pointsTotal || 0}/{draft.pointsLimit}</div>
       </div>
     </div>
   )

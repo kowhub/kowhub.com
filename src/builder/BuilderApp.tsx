@@ -7,7 +7,7 @@ import { DataRepository } from '../source_data/DataRepository'
 import { Draft } from '../source_data/Draft'
 import './BuilderApp.scss'
 
-import useUserDrafts from '../apollo/hooks/useUserDrafts'
+import useUserDraftsMeta from '../apollo/hooks/useUserDraftsMeta'
 import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 
 
@@ -18,25 +18,23 @@ const BuilderApp = (
 ) => {
   const { dataRepo } = props
 
-  const { drafts, loading, error } = useUserDrafts()
+  const { drafts, loading, error } = useUserDraftsMeta()
   const { currentDraftId } = useCurrentDraftId()
 
   const currentDraft = drafts.find(draft => draft.id === currentDraftId)
 
-  const currentDraftMeta = currentDraft
-    ? { ...currentDraft.meta, pointsTotal: dataRepo.getDraftPoints(currentDraft) }
-    : null
+  const currentDraftMeta = null
 
-  const currentDraftUnits = currentDraft ? currentDraft.units : null
+  const currentDraftUnits = null
 
   return (
     <div className="builder_app">
       <div className="builder_panel">
-        <UserDrafts drafts={drafts} currentDraftId={currentDraftId} />
+        <UserDrafts />
         <Browser dataRepo={dataRepo} />
-        <DraftDetail dataRepo={dataRepo} meta={currentDraftMeta} units={currentDraftUnits} />
+        <DraftDetail draft={currentDraft}/>
       </div>
-      <DraftSummary meta={currentDraftMeta} />
+      <DraftSummary draft={currentDraft} />
     </div>
   )
 }

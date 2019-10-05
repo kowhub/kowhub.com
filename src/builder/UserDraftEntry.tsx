@@ -1,20 +1,20 @@
 import React, { MouseEvent } from 'react'
-import { DraftMeta } from '../source_data/Draft'
+import { Draft } from '../source_data/Draft'
 
 const UserDraftEntry = (
   props: {
-    meta: DraftMeta,
+    draft: Draft,
     isSelected: boolean,
     selectDraft(evt: MouseEvent): void,
     removeDraft(evt: MouseEvent): void
   }
 ) => {
-  const { meta, isSelected, selectDraft, removeDraft } = props
+  const { draft, isSelected, selectDraft, removeDraft } = props
 
   return (
     <li onClick={selectDraft} className={isSelected ? 'selected' : null}>
       <button onClick={removeDraft}>X</button>
-      { '[' + meta.pointsLimit + '] ' + meta.name }
+      { '[' + draft.pointsLimit + '] ' + draft.name }
     </li>
   )
 }

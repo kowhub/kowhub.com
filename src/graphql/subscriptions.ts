@@ -6,13 +6,12 @@ export const onCreateDraft = `subscription OnCreateDraft($owner: String!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }
@@ -22,13 +21,12 @@ export const onUpdateDraft = `subscription OnUpdateDraft($owner: String!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }
@@ -38,13 +36,12 @@ export const onDeleteDraft = `subscription OnDeleteDraft($owner: String!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }

@@ -1,8 +1,26 @@
 import { useMutation } from '@apollo/react-hooks'
-import { CreateDraftInput, DraftMetaInput } from '../../API'
-import { LIST_DRAFTS_QUERY } from '../queries'
+//import { LIST_DRAFTS_QUERY } from '../queries'
 import { CREATE_DRAFT_MUTATION } from '../mutations'
 import { v4 as uuid } from 'uuid'
+import gql from 'graphql-tag'
+
+const LIST_DRAFTS_QUERY = gql`
+  query ListDrafts {
+    listDrafts {
+      items {
+        id
+        createdAt
+        updatedAt
+        name
+        army
+        pointsLimit
+        rulesVersion
+        dna
+        status
+      }
+    }
+  }
+`
 
 /*
  * MUTATION:
@@ -17,9 +35,10 @@ const useCreateDraftMutation = () => {
     CREATE_DRAFT_MUTATION,
     {
       update(cache, { data: { createDraft } }) {
-        console.log('Update cache with new draft: ', createDraft.meta.name)
+        console.log('Update cache with new draft: ', createDraft.name)
         console.log(createDraft)
         const { listDrafts } = cache.readQuery({ query: LIST_DRAFTS_QUERY })
+        console.log(listDrafts)
         cache.writeQuery({
           query: LIST_DRAFTS_QUERY,
           data: { listDrafts: {
@@ -34,12 +53,9 @@ const useCreateDraftMutation = () => {
     }
   )
 
-  const createDraft = ({ name, pointsLimit, kowVersion }) => {
-    const meta = { name, army: 'dw', pointsLimit, kowVersion }
-    const units = []
-
+  const createDraft = ({ name, pointsLimit, rulesVersion }) => {
     addDraft({
-      variables: { input: { meta, units } },
+      variables: { input: { name, pointsLimit, rulesVersion } },
       optimisticResponse: {
         __typename: 'Mutation',
         createDraft: {
@@ -48,8 +64,10 @@ const useCreateDraftMutation = () => {
           id: uuid(),
           createdAt: new Date().toString(),
           updatedAt: new Date().toString(),
-          meta: { ...meta, __typename: 'DraftMeta' },
-          units
+          dna: '',
+          name,
+          pointsLimit,
+          rulesVersion,
         }
       }
     })

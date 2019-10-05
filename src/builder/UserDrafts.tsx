@@ -1,19 +1,18 @@
 import React from 'react'
 import UserDraftEntry from './UserDraftEntry'
 import { Draft } from '../source_data/Draft'
-import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 import useCreateDraft from '../apollo/hooks/useCreateDraft'
 import useDeleteDraft from '../apollo/hooks/useDeleteDraft'
 
-const UserDrafts = (
-  props: {
-    drafts: Draft[],
-    currentDraftId: string,
-  }
-) => {
-  const { drafts, currentDraftId } = props
+import useUserDraftsMeta from '../apollo/hooks/useUserDraftsMeta'
+import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 
-  const { setCurrentDraftId } = useCurrentDraftId()
+const UserDrafts = () => {
+
+  const { drafts, loading, error } = useUserDraftsMeta()
+
+  const { currentDraftId, setCurrentDraftId } = useCurrentDraftId()
+
   const { createDraft } = useCreateDraft()
   const { deleteDraft } = useDeleteDraft()
 
@@ -21,9 +20,9 @@ const UserDrafts = (
     evt.preventDefault()
     evt.stopPropagation()
     createDraft({
-      name: 'October Revamp with Apollo!',
+      name: 'With new API schema',
       pointsLimit: 2000,
-      kowVersion: '201910'
+      rulesVersion: '201910'
     })
   }
 
@@ -46,7 +45,7 @@ const UserDrafts = (
   const listItems = drafts.map((draft) =>
     <UserDraftEntry
       key={draft.id}
-      meta={draft.meta}
+      draft={draft}
       isSelected={draft.id === currentDraftId}
       selectDraft={selectDraftHandler(draft.id)}
       removeDraft={removeDraftHandler(draft.id)}

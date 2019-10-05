@@ -1,17 +1,16 @@
 import React from 'react'
 import DraftDetailUnitEntry from './DraftDetailUnitEntry'
-import { connect } from 'react-redux'
 import useRemoveUnit from '../apollo/hooks/useRemoveUnit'
-import { DraftUnit } from '../source_data/Draft'
 import { DataRepository } from '../source_data/DataRepository'
+import { Unit } from '../source_data/Unit'
 
 const DraftDetailUnits = (
   props: {
-    dataRepo: DataRepository,
-    units: DraftUnit[],
+    //dataRepo: DataRepository,
+    units: Unit[],
   }
 ) => {
-  const { dataRepo, units } = props
+  const { units } = props
 
   const { removeUnit } = useRemoveUnit()
 
@@ -26,7 +25,7 @@ const DraftDetailUnits = (
   const listItems = units.map((unit) =>
     <DraftDetailUnitEntry
       key={unit.id}
-      unit={dataRepo.unpackUnit(unit.dna)}
+      unit={unit}
       removeUnit={removeUnitHandler(unit.id)}
     />
   )

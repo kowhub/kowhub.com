@@ -1,18 +1,15 @@
 import React from 'react'
 import DraftDetailUnits from './DraftDetailUnits'
-import { DraftMeta, DraftUnit } from '../source_data/Draft'
-import { DataRepository } from '../source_data/DataRepository'
+import { Draft } from '../source_data/Draft'
 
 const DraftDetail = (
   props: {
-    dataRepo: DataRepository,
-    meta: DraftMeta | null,
-    units: DraftUnit[] | null
+    draft: Draft
   }
 ) => {
-  const { dataRepo, meta, units } = props
+  const { draft } = props
 
-  if (!meta) {
+  if (!draft) {
     return (
       <div className="current_list">
         <div><b>Current List</b></div>
@@ -24,10 +21,10 @@ const DraftDetail = (
   return (
     <div className="current_list">
       <div><b>Current List</b></div>
-      <div>Name: <em>{meta.name}</em></div>
-      <div>Points limit: <em>{meta.pointsLimit}</em></div>
-      <DraftDetailUnits dataRepo={dataRepo} units={units} />
-      <div>Points total: <em>{meta.pointsTotal}</em></div>
+      <div>Name: <em>{draft.name}</em></div>
+      <div>Points limit: <em>{draft.pointsLimit}</em></div>
+      <DraftDetailUnits units={[]} />
+      <div>Points total: <em>{draft.pointsTotal}</em></div>
     </div>
   )
 }

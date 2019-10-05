@@ -6,13 +6,12 @@ export const getDraft = `query GetDraft($id: ID!) {
     id
     createdAt
     updatedAt
-    meta {
-      name
-      army
-      pointsLimit
-      kowVersion
-    }
-    units
+    name
+    army
+    pointsLimit
+    rulesVersion
+    dna
+    status
     owner
   }
 }
@@ -27,13 +26,12 @@ export const listDrafts = `query ListDrafts(
       id
       createdAt
       updatedAt
-      meta {
-        name
-        army
-        pointsLimit
-        kowVersion
-      }
-      units
+      name
+      army
+      pointsLimit
+      rulesVersion
+      dna
+      status
       owner
     }
     nextToken
