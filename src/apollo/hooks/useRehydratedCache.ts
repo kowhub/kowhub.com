@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react'
 import { ApolloClient } from 'apollo-client'
 import { useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { LIST_DRAFTS_QUERY } from '../queries'
 
 const rehydrateReducer = (state, action) => {
   console.log(action.type)
@@ -60,7 +61,8 @@ const useRehydratedCache = () => {
 
   const rehydrate = async () => {
     return client.query({
-      query: DRAFT_DATA_QUERY,
+      //query: DRAFT_DATA_QUERY,
+      query: LIST_DRAFTS_QUERY,
       fetchPolicy: 'cache-first',
     })
   }

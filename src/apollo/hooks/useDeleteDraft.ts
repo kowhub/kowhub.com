@@ -1,23 +1,7 @@
 import { useMutation } from '@apollo/react-hooks'
+import { LIST_DRAFTS_QUERY } from '../queries'
+import { DELETE_DRAFT_MUTATION } from '../mutations'
 import gql from 'graphql-tag'
-
-const DELETE_DRAFT_MUTATION = gql`
-  mutation DeleteDraft($input: DeleteDraftInput!) {
-    deleteDraft(input: $input) {
-      id
-    }
-  }
-`
-
-const LIST_DRAFTS_BY_ID_QUERY = gql`
-  query ListDrafts {
-    listDrafts {
-      items {
-        id
-      }
-    }
-  }
-`
 
 const useDeleteDraft = () => {
   const [ deleteDraft, { loading, error }] = useMutation(
@@ -25,9 +9,9 @@ const useDeleteDraft = () => {
     {
       update(cache, { data: { deleteDraft: { id } } }) {
         console.log('Update cache to remove draft: ', id)
-        const { listDrafts } = cache.readQuery({ query: LIST_DRAFTS_BY_ID_QUERY })
+        const { listDrafts } = cache.readQuery({ query: LIST_DRAFTS_QUERY })
         cache.writeQuery({
-          query: LIST_DRAFTS_BY_ID_QUERY,
+          query: LIST_DRAFTS_QUERY,
           data: { listDrafts: {
             ...listDrafts,
             items: listDrafts.items.filter(draft => draft.id !== id)

@@ -1,25 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import useCurrentDraftId from './useCurrentDraftId'
-import gql from 'graphql-tag'
-
-export const GET_CURRENT_DRAFT_ID = gql`
-  query GetCurrentDraft {
-    currentDraftId @client
-  }
-`
+import useUserDrafts from './useUserDrafts'
 
 const useCurrentDraft = () => {
   const { currentDraftId } = useCurrentDraftId()
+  const { drafts } = useUserDrafts()
 
-    /*
-  const currentDraftId = data ? data.currentDraftId || null : null
+  const currentDraft = currentDraftId
+    ? drafts.find(d => d.id === currentDraftId)
+    : null
 
-  const setCurrentDraftId = (id) => {
-    client.writeData({ data: { currentDraftId: id } })
-  }
-
-     */
-  return { currentDraftId }
+  return { currentDraft }
 }
 
 export default useCurrentDraft

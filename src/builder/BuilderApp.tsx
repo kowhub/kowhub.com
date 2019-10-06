@@ -4,11 +4,10 @@ import UserDrafts from './UserDrafts'
 import DraftDetail from './DraftDetail'
 import DraftSummary from './DraftSummary'
 import { DataRepository } from '../source_data/DataRepository'
-import { Draft } from '../source_data/Draft'
+import { Draft } from '../types/Draft'
 import './BuilderApp.scss'
 
-import useUserDraftsMeta from '../apollo/hooks/useUserDraftsMeta'
-import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
+import useWorkingDraft from '../apollo/hooks/useWorkingDraft'
 
 
 const BuilderApp = (
@@ -18,10 +17,15 @@ const BuilderApp = (
 ) => {
   const { dataRepo } = props
 
-  const { drafts, loading, error } = useUserDraftsMeta()
-  const { currentDraftId } = useCurrentDraftId()
+  const {
+    workingDraft,
+    removeUnit,
+    addUnit,
+    updateUnit,
+  } = useWorkingDraft(dataRepo)
 
-  const currentDraft = drafts.find(draft => draft.id === currentDraftId)
+  const units = workingDraft ? workingDraft.units : null
+  //debugger
 
   const currentDraftMeta = null
 
@@ -31,10 +35,14 @@ const BuilderApp = (
     <div className="builder_app">
       <div className="builder_panel">
         <UserDrafts />
-        <Browser dataRepo={dataRepo} />
-        <DraftDetail draft={currentDraft}/>
+        <Browser dataRepo={dataRepo} addUnit={addUnit} />
+        <DraftDetail
+          draft={workingDraft}
+          removeUnit={removeUnit}
+          updateUnit={updateUnit}
+        />
       </div>
-      <DraftSummary draft={currentDraft} />
+      <DraftSummary draft={workingDraft} />
     </div>
   )
 }

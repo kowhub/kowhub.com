@@ -1,16 +1,14 @@
 import React from 'react'
 import UserDraftEntry from './UserDraftEntry'
-import { Draft } from '../source_data/Draft'
+
+import useUserDrafts from '../apollo/hooks/useUserDrafts'
+import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
+
 import useCreateDraft from '../apollo/hooks/useCreateDraft'
 import useDeleteDraft from '../apollo/hooks/useDeleteDraft'
 
-import useUserDraftsMeta from '../apollo/hooks/useUserDraftsMeta'
-import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
-
 const UserDrafts = () => {
-
-  const { drafts, loading, error } = useUserDraftsMeta()
-
+  const { drafts, loading, error } = useUserDrafts()
   const { currentDraftId, setCurrentDraftId } = useCurrentDraftId()
 
   const { createDraft } = useCreateDraft()

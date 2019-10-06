@@ -9,14 +9,16 @@ import { useApolloClient } from '@apollo/react-hooks'
 import useClientRehydrated from './useClientRehydrated'
 import LoadingPage from './LoadingPage'
 
+import useRehydratedCache from './apollo/hooks/useRehydratedCache'
+
 const App = () => {
   //const { isRehydrated } = useClientRehydrated()
-  const isRehydrated = true
+  const { isRehydrated, isLoading: isRehydrateLoading } = useRehydratedCache()
 
   const { state: { user, isLoading/*, isError*/ }, handleSignout } = useAmplifyAuth()
   console.log('User: ' + user)
 
-  if (isLoading || !isRehydrated) {
+  if (isLoading || isRehydrateLoading) {
     return <LoadingPage message={'Rehydrating...'} />
   }
 

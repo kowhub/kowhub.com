@@ -1,13 +1,15 @@
 import React from 'react'
 import DraftDetailUnits from './DraftDetailUnits'
-import { Draft } from '../source_data/Draft'
+import { WorkingDraft } from '../types/Draft'
 
 const DraftDetail = (
   props: {
-    draft: Draft
+    draft: WorkingDraft,
+    removeUnit,
+    updateUnit,
   }
 ) => {
-  const { draft } = props
+  const { draft, removeUnit, updateUnit } = props
 
   if (!draft) {
     return (
@@ -23,7 +25,11 @@ const DraftDetail = (
       <div><b>Current List</b></div>
       <div>Name: <em>{draft.name}</em></div>
       <div>Points limit: <em>{draft.pointsLimit}</em></div>
-      <DraftDetailUnits units={[]} />
+      <DraftDetailUnits
+        units={draft.units}
+        removeUnit={removeUnit}
+        updateUnit={updateUnit}
+      />
       <div>Points total: <em>{draft.pointsTotal}</em></div>
     </div>
   )

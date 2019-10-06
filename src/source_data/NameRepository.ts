@@ -10,7 +10,7 @@ export class NameRepository {
 
   public find(key: string): NameStruct {
     const entry = this.names[key]
-    if (!entry) return { name: '(empty)', sname: '(empty)' }
+    if (!entry) return { name: '(unknown)', sname: '(unknown)' }
 
     return {
       name: entry[0],

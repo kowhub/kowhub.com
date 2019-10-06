@@ -6,12 +6,11 @@ const BrowserUnitPanel = (
   props: {
     armyName: string,
     units,
+    addUnit,
     setArmyView(): void
   }
 ) => {
-  const { armyName, units, setArmyView } = props
-
-  const { addUnit } = useAddUnit()
+  const { armyName, units, addUnit, setArmyView } = props
 
   const handleSelectArmyView = (evt) => {
     evt.preventDefault()

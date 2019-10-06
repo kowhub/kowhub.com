@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react'
-import { Unit } from '../source_data/Unit'
+import { Unit } from '../types/Draft'
 
 const DraftDetailUnitEntry = (
   props: {

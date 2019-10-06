@@ -1,6 +1,7 @@
 import { NameRepository } from './NameRepository'
 import { readDna } from './DnaReader'
-import { Unit } from './Unit'
+import { Unit } from '../types/Draft'
+import { createUnitId } from '../utils/RandomId'
 import {
   RawData,
   RawUnitForm,
@@ -21,23 +22,22 @@ export class UnitFactory {
        */
   }
 
-  public create(dna: string): Unit {
+  public create(dna: string, id: string | undefined): Unit {
+    const [unitKey, formKey, itemKey, upgradeKeys] = readDna(dna)
     return {
-      id: 'x',
-      dna: '',
-      name: 'tmp',
-      form: 'r',
+      id: id || createUnitId(),
+      dna,
+      //name: dna,
+      name: this.names.find(unitKey).name,
+      form: this.names.find(formKey).name,
       pts: 0,
     }
       /*
-    const [unitKey, formKey, itemKey, upgradeKeys] = readDna(dna)
     const unit = this.data.units[unitKey]
     const form = unit.forms[formKey]
     const item = this.data.items[itemKey]
     return {
       dna: dna,
-      name: this.names.find(unitKey).name,
-      form: this.names.find(formKey).name,
       pts: this.calculatePoints(form, item, upgradeKeys)
     }
        */

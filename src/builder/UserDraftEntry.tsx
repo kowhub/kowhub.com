@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react'
-import { Draft } from '../source_data/Draft'
+import { Draft } from '../types/Draft'
 
 const UserDraftEntry = (
   props: {

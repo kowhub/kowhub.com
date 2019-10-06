@@ -3,6 +3,7 @@ import BrowserArmyPanel from './BrowserArmyPanel'
 import BrowserUnitPanel from './BrowserUnitPanel'
 
 const reducer = (state, action) => {
+  console.log(action.type)
   switch (action.type) {
     case 'SET_ARMY_VIEW': {
       return { ...state, isArmyView: true }
@@ -16,7 +17,7 @@ const reducer = (state, action) => {
   }
 }
 
-const Browser = ({ dataRepo }) => {
+const Browser = ({ dataRepo, addUnit }) => {
   const initialState = {
     isArmyView: true,
     armyKey: ''
@@ -45,6 +46,7 @@ const Browser = ({ dataRepo }) => {
       <BrowserUnitPanel
         armyName={dataRepo.names.find(state.armyKey).name}
         units={units}
+        addUnit={addUnit}
         setArmyView={setArmyView}
       />
     )

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Draft } from '../source_data/Draft'
+import { WorkingDraft } from '../types/Draft'
 import './DraftSummary.scss'
 import useCurrentDraftId from '../apollo/hooks/useCurrentDraftId'
 
 const DraftSummary = (
   props: {
-    draft: Draft
+    draft: WorkingDraft
   }
 ) => {
   const { draft } = props

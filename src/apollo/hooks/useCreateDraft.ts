@@ -1,9 +1,10 @@
 import { useMutation } from '@apollo/react-hooks'
-//import { LIST_DRAFTS_QUERY } from '../queries'
+import { LIST_DRAFTS_QUERY } from '../queries'
 import { CREATE_DRAFT_MUTATION } from '../mutations'
 import { v4 as uuid } from 'uuid'
 import gql from 'graphql-tag'
 
+  /*
 const LIST_DRAFTS_QUERY = gql`
   query ListDrafts {
     listDrafts {
@@ -21,6 +22,7 @@ const LIST_DRAFTS_QUERY = gql`
     }
   }
 `
+   */
 
 /*
  * MUTATION:
@@ -57,6 +59,7 @@ const useCreateDraftMutation = () => {
     addDraft({
       variables: { input: { name, pointsLimit, rulesVersion } },
       optimisticResponse: {
+        /* Note that the optimistic response type must match the response exactly */
         __typename: 'Mutation',
         createDraft: {
           __typename: 'Draft',
@@ -64,10 +67,12 @@ const useCreateDraftMutation = () => {
           id: uuid(),
           createdAt: new Date().toString(),
           updatedAt: new Date().toString(),
-          dna: '',
           name,
+          army: '',
           pointsLimit,
           rulesVersion,
+          dna: '',
+          status: '',
         }
       }
     })

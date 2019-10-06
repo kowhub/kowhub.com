@@ -1,14 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-
-export const GET_CURRENT_DRAFT_ID = gql`
-  query GetCurrentDraft {
-    currentDraftId @client
-  }
-`
+import { GET_CURRENT_DRAFT_ID_QUERY } from '../queries'
 
 const useCurrentDraftId = () => {
-  const { data, client } = useQuery(GET_CURRENT_DRAFT_ID);
+  const { data, client } = useQuery(GET_CURRENT_DRAFT_ID_QUERY);
   const currentDraftId = data ? data.currentDraftId || null : null
 
   const setCurrentDraftId = (id) => {

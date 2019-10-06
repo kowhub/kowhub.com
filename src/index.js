@@ -6,7 +6,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 import { Provider } from 'react-redux'
-import store from './redux/store'
+//import store from './redux/store'
 
 import Amplify, { Auth } from 'aws-amplify'
 import awsconfig from './aws-build-config'
@@ -14,7 +14,6 @@ import { Rehydrated } from 'aws-appsync-react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { AWSAppSyncClient, buildSync, AUTH_TYPE } from 'aws-appsync'
 import * as localForage from 'localforage'
-import * as DeltaSync from './graphql/DeltaSync'
 
 import { createAppSyncLink } from "aws-appsync"
 import { ApolloClient } from 'apollo-client'

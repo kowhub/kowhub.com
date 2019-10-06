@@ -1,18 +1,15 @@
 import React from 'react'
 import DraftDetailUnitEntry from './DraftDetailUnitEntry'
-import useRemoveUnit from '../apollo/hooks/useRemoveUnit'
-import { DataRepository } from '../source_data/DataRepository'
-import { Unit } from '../source_data/Unit'
+import { Unit } from '../types/Draft'
 
 const DraftDetailUnits = (
   props: {
-    //dataRepo: DataRepository,
     units: Unit[],
+    removeUnit,
+    updateUnit,
   }
 ) => {
-  const { units } = props
-
-  const { removeUnit } = useRemoveUnit()
+  const { units, removeUnit, updateUnit } = props
 
   const removeUnitHandler = (id: string) => {
     return (evt) => {

@@ -2,8 +2,7 @@ import { RawData } from './RawDataTypes'
 import { NameRepository } from './NameRepository'
 import { readDna } from './DnaReader'
 import { UnitFactory } from './UnitFactory'
-import { Draft } from './Draft'
-import { Unit } from './Unit'
+import { Draft, Unit } from '../types/Draft'
 
 export class DataRepository {
   private unitFactory: UnitFactory
@@ -32,7 +31,7 @@ export class DataRepository {
 
     return army.unitKeyList.map(unitKey => {
       return {
-        //...this.data.units[unitKey],
+        ...this.data.units[unitKey],
         ...this.names.find(unitKey),
         key: unitKey,
       }
@@ -49,7 +48,13 @@ export class DataRepository {
     return this.unitFactory.readPoints(dna)
   }
 
-  public unpackUnit(dna: string): Unit {
-    return this.unitFactory.create(dna)
+  public unpackDraft(draftDna: string): Unit[] {
+    return draftDna.split(';')
+      .filter(unitDna => unitDna.length > 4)
+      .map(unitDna => this.unpackUnit(unitDna))
+  }
+
+  public unpackUnit(dna: string, id: string = undefined): Unit {
+    return this.unitFactory.create(dna, id)
   }
 }
