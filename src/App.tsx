@@ -5,21 +5,22 @@ import useAmplifyAuth from './authentication/useAmplifyAuth'
 import AuthenticationPage from './authentication/AuthenticationPage'
 import AppHeader from './AppHeader'
 import './App.scss'
-import { useApolloClient } from '@apollo/react-hooks'
-import useClientRehydrated from './useClientRehydrated'
 import LoadingPage from './LoadingPage'
+import { ApolloProvider } from '@apollo/react-hooks'
 
-import useRehydratedCache from './apollo/hooks/useRehydratedCache'
+import useKowhubApiClient from './useKowhubApiClient'
 
 const App = () => {
-  //const { isRehydrated } = useClientRehydrated()
-  const { isRehydrated, isLoading: isRehydrateLoading } = useRehydratedCache()
+  const { state: { user, isLoading }, handleSignout } = useAmplifyAuth()
 
-  const { state: { user, isLoading/*, isError*/ }, handleSignout } = useAmplifyAuth()
-  console.log('User: ' + user)
+  const {
+    client,
+    isLoading: isClientLoading,
+    error: clientError
+  } = useKowhubApiClient()
 
-  if (isLoading || isRehydrateLoading) {
-    return <LoadingPage message={'Rehydrating...'} />
+  if (isLoading || !client) {
+    return <LoadingPage message={'Loading client...'} />
   }
 
   if (!user) {
@@ -27,6 +28,7 @@ const App = () => {
   }
 
   return  (
+  <ApolloProvider client={client}>
     <div>
       <AppHeader handleSignout={handleSignout} />
       <Switch>
@@ -39,8 +41,8 @@ const App = () => {
         )}/>
       </Switch>
     </div>
+  </ApolloProvider>
   )
 }
-//render={(props) => <BuilderAppWrapper {...props} client={client} />}
 
 export default App

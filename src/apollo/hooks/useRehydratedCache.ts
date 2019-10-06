@@ -31,24 +31,6 @@ const rehydrateReducer = (state, action) => {
   }
 }
 
-const DRAFT_DATA_QUERY = gql`
-  query ListDrafts {
-    listDrafts {
-      items {
-        id
-        createdAt
-        updatedAt
-        name
-        army
-        pointsLimit
-        rulesVersion
-        dna
-        status
-      }
-    }
-  }
-`
-
 const useRehydratedCache = () => {
   const initialState = {
     isLoading: true,
@@ -61,7 +43,6 @@ const useRehydratedCache = () => {
 
   const rehydrate = async () => {
     return client.query({
-      //query: DRAFT_DATA_QUERY,
       query: LIST_DRAFTS_QUERY,
       fetchPolicy: 'cache-first',
     })
